@@ -14,6 +14,4 @@ use App\Http\Controllers\admin\dashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/admin/dashboard', [dashboardController::class,'Index']);
