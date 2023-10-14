@@ -41,31 +41,15 @@
                 @include('admin.header')
 
                 <!-- Begin Page Content -->
-                Sửa vào đây ok <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                    <title>Document</title>
-                </head>
-                <body>
-                    
-                </body>
-                </html>
-                <!-- /.container-fluid -->
-
+                <div>
+                @yield('main')
+                </div>
             </div>
+                <!-- /.container-fluid -->
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
+            @include('admin.footer')
             <!-- End of Footer -->
 
         </div>
