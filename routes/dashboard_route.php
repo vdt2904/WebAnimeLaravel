@@ -15,3 +15,4 @@ use App\Http\Controllers\admin\dashboardController;
 */
 
 Route::get('/admin/dashboard', [dashboardController::class,'Index']);
+Route::get('/admin/users', [dashboardController::class,'userlist']);
