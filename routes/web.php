@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\admin\dashboardController;
+use App\Http\Controllers\admin\registerController;
+use App\Models\TBGoi;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/register',[registerController::class,'Index']);
+Route::post('/addregister',[registerController::class,'store'])->name('addregister');
