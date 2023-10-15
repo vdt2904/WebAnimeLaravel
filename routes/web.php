@@ -17,3 +17,4 @@ use App\Http\Controllers\admin\dashboardController;
 Route::get('/', function () {
     return view('welcome');
 });
+

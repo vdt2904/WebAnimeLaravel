@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\dashboardController;
-
+use App\Http\Controllers\admin\BlogsController;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,7 @@ use App\Http\Controllers\admin\dashboardController;
 
 Route::get('/admin/dashboard', [dashboardController::class,'Index']);
 Route::get('/admin/users', [dashboardController::class,'userlist']);
+Route::get('/admin/animes', [dashboardController::class,'animelist']);
+Route::get('/admin/blogs', [BlogsController::class,'blogslist'])->name('admin.blogs');
+Route::get('/admin/blogs/add', [BlogsController::class,'create']);
+Route::post('uploadblogs', [BlogsController::class,'uploadblogs'])->name('Blogs.uploadblogs');
