@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 Route::get('/admin/dashboard', [dashboardController::class,'Index']);
 Route::get('/admin/users', [dashboardController::class,'userlist']);
 Route::get('/admin/animes', [dashboardController::class,'animelist']);
+
 Route::get('/admin/blogs', [BlogsController::class,'blogslist'])->name('admin.blogs');
 Route::get('/admin/blogs/add', [BlogsController::class,'create']);
 Route::post('uploadblogs', [BlogsController::class,'uploadblogs'])->name('Blogs.uploadblogs');
