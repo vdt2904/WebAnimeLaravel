@@ -10,7 +10,7 @@
             <input type="text" class="form-control col-md-6" id="name" name="name" required>
         </div>
         <div class="form-group">
-            <label for="image">Chọn Ảnh</label>
+            <img id="imagePreview" src="" width="200" height="150" alt="Ảnh hiện tại">
             <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
         </div>
         

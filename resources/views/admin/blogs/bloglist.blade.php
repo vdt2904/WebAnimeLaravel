@@ -31,7 +31,7 @@
                                     <td style="text-align: center;">{{$k->ThongTin}}</td>
                                     <td style="text-align: center;">{{$k->NgayDang}}</td>
                                     <td>
-                                        <a class="fas fa-pencil-alt text-primary" href="#"></a>
+                                        <a class="btn btn-primary" href="{{url('/admin/blogs/edit/'.$k->IDBlog)}}">Sửa</a>
                                         <a class="fas fa-trash-alt text-danger" href="#"></a>
                                     </td>                                    
                                     
