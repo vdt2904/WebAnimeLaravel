@@ -17,4 +17,11 @@ class blogss extends Model
     public function insertblogs($data){
         return DB::table($this->table)->insert($data);
     }
+
+    public function getdetail($id){
+        return DB::table($this->table)->where('IDBlog',$id)->get();
+    }
+    public function updateblogs($data,$id){
+        return DB::table($this->table)->where('IDBlog',$id)->update($data);
+    }
 }

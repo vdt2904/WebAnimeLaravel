@@ -1,3 +1,17 @@
+<script>
+    // Sử dụng JavaScript để thay đổi hình ảnh khi chọn tệp mới
+    document.getElementById('image').addEventListener('change', function () {
+        var imagePreview = document.getElementById('imagePreview');
+        var fileInput = this;
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
+</script>
 <script src="/Admin/vendor/jquery/jquery.min.js"></script>
     <script src="/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

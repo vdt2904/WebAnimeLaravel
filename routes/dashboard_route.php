@@ -21,3 +21,5 @@ Route::get('/admin/animes', [dashboardController::class,'animelist']);
 Route::get('/admin/blogs', [BlogsController::class,'blogslist'])->name('admin.blogs');
 Route::get('/admin/blogs/add', [BlogsController::class,'create']);
 Route::post('uploadblogs', [BlogsController::class,'uploadblogs'])->name('Blogs.uploadblogs');
+Route::get('/admin/blogs/edit/{id}', [BlogsController::class,'edit']);
+Route::put('updateblogs', [BlogsController::class,'editblog'])->name('Blogs.updateblogs');
