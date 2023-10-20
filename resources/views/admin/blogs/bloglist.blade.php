@@ -4,7 +4,7 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Danh Sách Bolgs</h6>
         <br/>
-        <a class="btn btn-primary" href="{{url('/admin/blogs/add')}}>Thêm</a>
+        <a class="btn btn-primary" href="{{url('/admin/blogs/add')}}">Thêm</a>
     </div>
     <div class="card-body">
         <div class="table">
