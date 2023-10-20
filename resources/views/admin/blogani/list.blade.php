@@ -2,9 +2,9 @@
 @section('main')
 
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Danh Sách Bolgs</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Blog</h6>
         <br/>
-        <a class="btn btn-primary" href="{{url('/admin/blogs/add')}}>Thêm</a>
+        <a class="btn btn-primary">Thêm</a>
     </div>
     <div class="card-body">
         <div class="table">
@@ -14,37 +14,34 @@
                         <table class="table table-bordered" >
                             <thead style="text-align: center;">
                                 <tr>
-                                    <th>Blog</th>
-                                    <th>Ảnh</th>
-                                    <th>Thông tin</th>
-                                    <th>Ngày dăng</th>
+                                    <th>Mã Anime</th>
+                                    <th>ID blogs</th>
+                                    <th>Trailer link</th>
                                     <th></th>
 
                                 </tr>
                             </thead>    
                             <tbody>
-                            @if (!empty($userslist1))
-                                @foreach ($userslist1 as $item => $k)
+                            @if (!empty($ds))
+                                @foreach ($ds as $item => $k)
                                 <tr>
-                                    <td style="text-align: center;">{{$k->TenBlog}}</td>
-                                    <td style="text-align: center;"><img src="{{ $k->Anh }}" alt="Hình ảnh" width="50" height="50"></td>
-                                    <td style="text-align: center;">{{$k->ThongTin}}</td>
-                                    <td style="text-align: center;">{{$k->NgayDang}}</td>
+                                    <td style="text-align: center;">{{$k->MaAnime}}</td>
+                                    <td style="text-align: center;"><img src="{{ $k->IDBlog }}" alt="Hình ảnh" width="50" height="50"></td>
+                                    <td style="text-align: center;">{{$k->Trailer}}</td>
                                     <td>
-                                        <a class="btn btn-primary" href="{{url('/admin/blogs/edit/'.$k->IDBlog)}}">Sửa</a>
-                                        <a class="fas fa-trash-alt text-danger" href="#"></a>
+                                        <a class="btn btn-primary" href="{{url('#'.$k->ID)}}">Sửa</a>
                                     </td>                                    
                                     
                                 </tr>                       
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="8" style="text-align: center">Không có blog nào</td>
+                                    <td colspan="8" style="text-align: center">Danh sách trống</td>
                                 </tr>
                             @endif               
                             </tbody>
                         </table>
-                        {{$userslist1->links()}}
+                        {{$ds->links()}}
                     </div>
                 </div>
             </div>    

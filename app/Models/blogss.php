@@ -11,6 +11,7 @@ class blogss extends Model
     protected $table = "tb_ourblog";
     public function getall(){
         $animes = DB::select('SELECT * from tb_ourblog');
+        
         return $animes;
     }
 
@@ -23,5 +24,8 @@ class blogss extends Model
     }
     public function updateblogs($data,$id){
         return DB::table($this->table)->where('IDBlog',$id)->update($data);
+    }
+    public function deleteblogs($id){
+        return DB::table($this->table)->where('IDBlog',$id)->delete();
     }
 }
