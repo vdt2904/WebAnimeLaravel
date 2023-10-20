@@ -88,4 +88,6 @@ class BlogsController extends Controller
         $blo->updateblogs($dataupdate,$IDBlog);
         return redirect()->route('admin.blogs');
     }
+
+    
 }

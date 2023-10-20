@@ -20,10 +20,6 @@ class dashboardController extends Controller
        
         return View('admin.users.userlist',compact('userslist1'));
     }
-    public function animelist(){
-        $userss = new Animess();
-        $userslist1 = $userss->getall(); 
-        return View('admin.animes.animelist',compact('userslist1'));
-    }
+    
     
 }
