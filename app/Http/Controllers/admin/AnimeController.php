@@ -13,6 +13,7 @@ class AnimeController extends Controller
     public function animelist(){
         $userss = new Animess();
         $userslist1 = $userss->getall(); 
+        dd($userslist1);
         return View('admin.animes.animelist',compact('userslist1'));
     }
 }

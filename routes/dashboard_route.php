@@ -6,6 +6,8 @@ use App\Http\Controllers\admin\BlogsController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\admin\BlogAniController;
 use App\Http\Controllers\admin\AnimeController;
+use App\Http\Controllers\admin\TheLoaiController;
+use App\Http\Controllers\admin\HangPhimController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +32,15 @@ Route::put('updateblogs', [BlogsController::class,'editblog'])->name('Blogs.upda
 Route::get('/admin/bloganime', [BlogAniController::class,'BAlist'])->name('admin.bloganime');
 //anime
 Route::get('/admin/animes', [AnimeController::class,'animelist']);
+//theloai
+Route::get('/admin/theloai', [TheLoaiController::class,'index'])->name('admin.theloai');
+Route::get('/admin/theloai/add', [TheLoaiController::class,'create']);
+Route::post('addtheloai',[TheLoaiController::class,'adddata'])->name('addtheloai');
+Route::get('/admin/theloai/edit/{id}', [TheLoaiController::class,'edit']);
+Route::put('updatetheloai', [TheLoaiController::class,'edittl'])->name('theloai.updatetheloai');
+//hangphim
+Route::get('/admin/hangphim', [HangPhimController::class,'index'])->name('admin.hangphim');
+Route::get('/admin/hangphim/add', [HangPhimController::class,'create']);
+Route::post('addhangphim',[HangPhimController::class,'adddata'])->name('addhangphim');
+Route::get('/admin/hangphim/edit/{id}', [HangPhimController::class,'edit']);
+Route::put('updatehangphim', [HangPhimController::class,'edithp'])->name('hangphim.updatehangphim');

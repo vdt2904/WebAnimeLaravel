@@ -14,7 +14,7 @@ class BlogsController extends Controller
     public function blogslist(){
         $userss = new blogss();
         $userslist1 = $userss->getall(); 
-        $userslist1= Blogss::paginate(1);
+        $userslist1= Blogss::paginate(5);
 
         return View('admin.blogs.bloglist',compact('userslist1'));
     }

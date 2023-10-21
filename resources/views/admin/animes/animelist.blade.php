@@ -5,7 +5,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Danh Sách Anime</h6>
     </div>
     <div class="card-body">
-        <div class="table-responsive">
+        <div class="table">
             <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                 <div class="row">
                     <div class="col-sm-12">

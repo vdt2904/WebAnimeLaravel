@@ -13,7 +13,7 @@ class theloai extends Model
     public function getall(){
         return DB::table($this->table)->get();
     }
-    public function getdetail(){
+    public function getdetail($id){
         return DB::table($this->table)->where('MaTL',$id)->get();
     }
 
