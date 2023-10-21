@@ -11,9 +11,10 @@ class hangphim extends Model
     protected $table = "tb_hangphim";
 
     public function getall(){
-        return DB::table($this->table)->get();
+        $hp = DB::select('SELECT * from tb_hangphim');        
+        return $hp;
     }
-    public function getdetail(){
+    public function getdetail($id){
         return DB::table($this->table)->where('MaHP',$id)->get();
     }
 

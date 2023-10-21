@@ -15,6 +15,12 @@ use App\Http\Controllers\admin\dashboardController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('HomeLayout');
+});
+Route::get('/login', function () {
+    return view('LoginHome');
+});
+Route::get('/admin/login', function () {
+    return view('LoginAdmin');
 });
 
