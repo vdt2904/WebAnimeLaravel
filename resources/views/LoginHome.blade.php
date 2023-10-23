@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -13,7 +12,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="/Home/css/bootstrap.min.css" type="text/css">
@@ -58,14 +57,24 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Login</h3>
-                        <form method="POST" action="{{ route('login.authenticate')}}">
+                        @if (isset($errors) && $errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form method="POST" action="{{ route('login.authenticate') }}">
                             @csrf
                             <div class="input__item">
-                                <input type="text" name="Email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input type="text" name="Email" placeholder="Email" value="{{ old('Email') }}"
+                                    required autocomplete="email" autofocus>
                                 <span class="icon_mail"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" name="Password" placeholder="Password" >
+                                <input type="password" name="Password" placeholder="Password">
                                 <span class="icon_lock"></span>
                             </div>
                             <button type="submit" class="site-btn">Login Now</button>
@@ -86,10 +95,13 @@
                         <div class="login__social__links">
                             <span>or</span>
                             <ul>
-                                <li><a href="{{ route('login.facebook') }}" class="facebook"><i class="fa fa-facebook"></i> Sign in With
-                                Facebook</a></li>
-                                <li><a href="{{ route('login.google') }}" class="google"><i class="fa fa-google"></i> Sign in With Google</a></li>
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i> Sign in With Twitter</a>
+                                <li><a href="{{ route('login.facebook') }}" class="facebook"><i
+                                            class="fa fa-facebook"></i> Sign in With
+                                        Facebook</a></li>
+                                <li><a href="{{ route('login.google') }}" class="google"><i class="fa fa-google"></i>
+                                        Sign in With Google</a></li>
+                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i> Sign in With
+                                        Twitter</a>
                                 </li>
                             </ul>
                         </div>
@@ -102,10 +114,10 @@
 
     <!-- Footer Section Begin -->
     @include('home.footer')
-      <!-- Footer Section End -->
+    <!-- Footer Section End -->
 
-      <!-- Search model Begin -->
-      @include('home.search')
+    <!-- Search model Begin -->
+    @include('home.search')
     <!-- Search model end -->
 
     <!-- Js Plugins -->
