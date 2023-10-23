@@ -79,7 +79,7 @@
                                     class="fa fa-eye"></i></span>
                         </div>
                         <div class="input__item">
-                            <input type="password" id="cfpassword" name="cfPassword" placeholder="cdPassword"
+                            <input type="password" id="cfpassword" name="CFPassword" placeholder="confirm Password"
                                 class="password-input">
                             <span class="toggle-password" onclick="togglePasswordVisibility1()"><i
                                     class="fa fa-eye"></i></span>

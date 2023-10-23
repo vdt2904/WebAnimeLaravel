@@ -21,7 +21,7 @@ class UserRegisterController extends Controller
         $cpasRegex = '/^[a-zA-Z0-9]{8}$/';
         $cnameRegex = '/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/';
         $pass = $request->Password;
-        $repass = $request->RePassword;
+        $repass = $request->CFPassword;
         $email = $request->Email;
         $name = $request->TenND;
         $numberphone = $request->SDT;
