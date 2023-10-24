@@ -29,43 +29,45 @@ class LoginController extends Controller
         }
     }
 
-    //     public function handleFacebookCallback()
-    //     {
-    //         $user = Socialite::driver('facebook')->user();
-    //         $existingUser = Userss::where('email', $user->email)->first();
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+        $existingUser = Userss::where('email', $user->email)->first();
 
-    //         if ($existingUser) {
-    //             auth()->login($existingUser, true);
-    //         } else {
-    //             $newUser = new Userss();
-    //             $newUser->TenND = $user->name;
-    //             $newUser->email = $user->email;
-    //             $newUser->password = bcrypt(123456);
-    //             $newUser->save();
-    //             //auth()->login($newUser, true);
-    //         }
+        if ($existingUser) {
+            auth()->login($existingUser, true);
+        } else {
+            $newUser = new Userss();
+            $newUser->TenND = $user->name;
+            $newUser->email = $user->email;
+            $newUser->password = bcrypt(123456);
+            $newUser->save();
+            //auth()->login($newUser, true);
+        }
 
-    //         return redirect()->to('/');
-    //     }
-    //     public function handleGoogleCallback()
-    //     {
-    //         $user = Socialite::driver('google')->user();
-    //         $existingUser = Userss::where('email', $user->email)->first();
+        return redirect()->to('/');
+    }
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+        $existingUser = Userss::where('email', $user->email)->first();
 
-    //         if ($existingUser) {
-    //             auth()->login($existingUser, true);
-    //         } else {
-    //             $newUser = new Userss();
-    //             $newUser->insertuser([
-    //                 'MaND' => $user->id,
-    //                 'TenND' => $user->name,
-    //                 'email' => $user->email,
-    //                 'password' => bcrypt(123456),
-    //             ]);
-    //             // auth()->login($newUser, true);
-    //         }
+        if ($existingUser) {
+            auth()->login($existingUser, true);
+        } else {
+            $newUser = new Userss();
+            $newUser->insertuser([
+                'MaND' => Userss::count() + 1,
+                'TenND' => $user->name,
+                'Email' => $user->email,
+                'Password' => bcrypt(123456),
+                'SDT' => '0',
+                'LoaiND' => 1,
 
-    //         return redirect('/');
-    //     }
-    // }
+            ]);
+            Auth::login($newUser, true);
+        }
+
+        return redirect()->route('HomeLayout');
+    }
 }

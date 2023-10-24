@@ -33,12 +33,15 @@ Route::post('/signup/add', [UserRegisterController::class, 'insertuser'])->name(
 //---------------------------------------
 use Laravel\Socialite\Facades\Socialite;
 
-Route::get('/login/facebook', function () {
+Route::get('/auth/facebook', function () {
     return Socialite::driver('facebook')->redirect();
 })->name('login.facebook');
-Route::get('/login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
+Route::get('/auth/callback/facebook', [LoginController::class, 'handleFacebookCallback']);
+
+
+//Login by google
 Route::get('/auth/google', function () {
     return Socialite::driver('google')->redirect();
 })->name('login.google');
 
-Route::get('/callback/google', [LoginController::class, 'handleGoogleCallback']);
+Route::get('/auth/callback/google', [LoginController::class, 'handleGoogleCallback']);
