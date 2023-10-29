@@ -44,7 +44,9 @@
                             @endif               
                             </tbody>
                         </table>
+                        @if (!empty($userslist1))
                         {{$userslist1->links()}}
+                        @endif
                     </div>
                 </div>
             </div>    

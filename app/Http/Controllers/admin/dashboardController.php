@@ -12,7 +12,7 @@ use App\Models\Animess;
 class dashboardController extends Controller
 {
     public function Index(){
-        return View('AdminLayout');
+        return View('admin.dashboard.index');
     }
     public function userlist(){
         $userss = new Userss();

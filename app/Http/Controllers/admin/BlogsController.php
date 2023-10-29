@@ -14,8 +14,11 @@ class BlogsController extends Controller
     public function blogslist(){
         $userss = new blogss();
         $userslist1 = $userss->getall(); 
-        $userslist1= Blogss::paginate(5);
-
+        if(!empty($userslist1)){
+            $userslist1= Blogss::paginate(5);
+        }
+        
+        //dd($userslist1);
         return View('admin.blogs.bloglist',compact('userslist1'));
     }
 
@@ -26,7 +29,7 @@ class BlogsController extends Controller
 
     public function uploadblogs(Request $request)
     {
-        $folder = 'img';
+        $folder = 'WebAnime/blog/img';
         $response = cloudinary()->upload($request->file('image')->getRealPath(), [
             'folder' => $folder,
         ])->getSecurePath();
@@ -69,11 +72,11 @@ class BlogsController extends Controller
             if(!empty($request->file('image'))){
                 $parts = pathinfo($blogdetail[0]->Anh);
                 $publicId = $parts['filename']; 
-                $folder = 'img';
+                $folder = 'WebAnime/blog/img';
                 $response = cloudinary()->upload($request->file('image')->getRealPath(), 
                 ['folder' => $folder,])->getSecurePath();                
                // $uploadApi= cloudinary()->destroy('img/'.$publicId);
-                cloudinary::destroy('img/'.$publicId);
+                cloudinary::destroy('WebAnime/img/blog/'.$publicId);
             }else{
                 $response = $blogdetail[0]->Anh;
             }

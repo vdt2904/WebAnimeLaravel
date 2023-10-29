@@ -2,9 +2,9 @@
 @section('main')
 
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Danh Sách Hãng Phim</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh Sách Loại Phim</h6>
         <br>
-        <a class="btn btn-primary" href="{{url('/admin/hangphim/add')}}">Thêm</a>
+        <a class="btn btn-primary" href="{{url('/admin/loaiphim/add')}}">Thêm</a>
     </div>
     <div class="card-body">
         <div class="table">
@@ -14,8 +14,8 @@
                         <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th rowspan="1" colspan="1">Mã Hãng Phim</th>
-                                    <th rowspan="1" colspan="1">Hãng Phim</th>
+                                    <th rowspan="1" colspan="1">Mã Loại Phim</th>
+                                    <th rowspan="1" colspan="1">Loại Phim</th>
                                     <th rowspan="1" colspan="1"></th>
                                 </tr>
                             </thead>    
@@ -23,17 +23,17 @@
                             @if (!empty($ds))
                                 @foreach ($ds as $item => $k)
                                 <tr class="odd">
-                                    <td>{{$k->MaHP}}</td>
-                                    <td>{{$k->HangPhim}}</td>
+                                    <td>{{$k->MaLP}}</td>
+                                    <td>{{$k->LoaiPhim}}</td>
                                     <td>
-                                        <a class="btn btn-primary" href="{{url('/admin/hangphim/edit/'.$k->MaHP)}}">Sửa</a>
+                                        <a class="btn btn-primary" href="{{url('/admin/loaiphim/edit/'.$k->MaLP)}}">Sửa</a>
                                         <a class="fas fa-trash-alt text-danger" href="#"></a>
                                     </td>                                                                       
                                 </tr>                       
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="8" style="text-align: center">Không có hãng phim nào</td>
+                                    <td colspan="8" style="text-align: center">Không có loại phim nào</td>
                                 </tr>
                             @endif               
                             </tbody>
