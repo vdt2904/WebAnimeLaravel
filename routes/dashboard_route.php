@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\TheLoaiController;
 use App\Http\Controllers\admin\HangPhimController;
 use App\Http\Controllers\admin\GoiController;
 use App\Http\Controllers\admin\LoaiPhimController;
+use App\Http\Controllers\admin\TapPhimController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,8 @@ Route::put('updateblogs', [BlogsController::class,'editblog'])->name('Blogs.upda
 Route::get('/admin/bloganime', [BlogAniController::class,'BAlist'])->name('admin.bloganime');
 Route::get('/admin/bloganime/add', [BlogAniController::class,'create']);
 Route::post('uploadbloganime', [BlogAniController::class,'uploadtrailer'])->name('bloganime.uploadbloganime');
+Route::get('/admin/bloganime/edit/{id}', [BlogAniController::class,'edit']);
+Route::put('updateblogani', [BlogAniController::class,'editbla'])->name('bloganime.updateblogani');
 //anime
 Route::get('/admin/animes', [AnimeController::class,'animelist'])->name('admin.animes');
 Route::get('/admin/animes/add', [AnimeController::class,'create']);
@@ -65,3 +68,9 @@ Route::get('/admin/loaiphim/add', [LoaiPhimController::class,'create']);
 Route::post('addloaiphim',[LoaiPhimController::class,'adddata'])->name('addloaiphim');
 Route::get('/admin/loaiphim/edit/{id}', [LoaiPhimController::class,'edit']);
 Route::put('updateloaiphim', [LoaiPhimController::class,'editlp'])->name('loaiphim.updateloaiphim');
+//TapPhim
+Route::get('/admin/tapphim', [TapPhimController::class,'index'])->name('admin.tapphim');
+Route::get('/admin/tapphim/add', [TapPhimController::class,'create']);
+Route::post('addtapphim',[TapPhimController::class,'adddata'])->name('addtapphim');
+Route::get('/admin/tapphim/edit/{id}', [TapPhimController::class,'edit']);
+Route::put('updatetapphim', [TapPhimController::class,'edittp'])->name('tapphim.updatetapphim');

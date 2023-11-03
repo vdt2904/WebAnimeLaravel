@@ -39,4 +39,46 @@ class BlogAniController extends Controller
         $addd = $trailer->insertdata($datainsert);
         return redirect()->route('admin.bloganime');
     }
+    public function edit(Request $request,$id){
+        if(!empty($id)){
+            $anib = new bloganime();
+            $anibdetail = $anib->getdetail($id);
+            if(!empty($anibdetail[0])){
+                $request->session()->put('ID',$id);
+                $anibdetail = $anibdetail[0];
+            }else{
+                return redirect()->route('admin.bloganime')->with('msg','blog không tồn tại');
+            }
+        }
+        else{
+            return redirect()->route('admin.bloganime')->with('msg','lien ket không tồn tại');
+        }
+        $maanime = DB::select('SELECT MaAnime,Anime from tb_anime');
+        $idblog = DB::select('SELECT IDBlog,TenBlog from tb_ourblog');
+        return view('admin.blogani.edit',compact('anibdetail','maanime','idblog'));
+    }
+    public function editbla(Request $request){
+        $ID = $request->session()->get('ID');
+        $anib = new bloganime();
+        $anibdetail = $anib->getdetail($ID);
+        if(!empty($anibdetail[0])){
+            if(!empty($request->file('image'))){
+                $folder = 'WebAnime/anime/'.$request->maanime.'/trailer';
+                $publicId = $request->maanime;
+                $response = cloudinary()->uploadVideo($request->file('video')->getRealPath(), [
+                    'public_id' => $publicId,
+                    'folder' => $folder,
+                ])->getSecurePath();
+            }else{
+                $response = $anibdetail[0]->Trailer;
+            }
+            $dataupdate = [
+                'MaAnime' => $request->maanime,
+                'IDBlog' => $request-> idblog,
+                'Trailer' => $response,
+            ];
+        }
+        $anib->updatedata($dataupdate,$ID);
+        return redirect()->route('admin.bloganime');
+    }
 }

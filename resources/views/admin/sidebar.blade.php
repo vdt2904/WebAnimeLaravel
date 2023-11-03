@@ -29,7 +29,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{url('/admin/animes')}}">Anime</a>
-                <a class="collapse-item" href="cards.html">Tập Phim</a>
+                <a class="collapse-item" href="{{url('/admin/tapphim')}}">Tập Phim</a>
                 <a class="collapse-item" href="{{url('/admin/theloai')}}">The loai</a>               
                 <a class="collapse-item" href="cards.html">The loai của phim</a>
                 <a class="collapse-item" href="{{url('/admin/hangphim')}}">Hãng phim</a>

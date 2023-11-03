@@ -29,7 +29,7 @@
                                     <td style="text-align: center;">{{$k->IDBlog}}</td>
                                     <td style="text-align: center;">{{$k->Trailer}}</td>
                                     <td>
-                                        <a class="btn btn-primary" href="{{url('#'.$k->ID)}}">Sửa</a>
+                                        <a class="btn btn-primary" href="{{url('/admin/bloganime/edit/'.$k->ID)}}">Sửa</a>
                                     </td>                                    
                                     
                                 </tr>                       
