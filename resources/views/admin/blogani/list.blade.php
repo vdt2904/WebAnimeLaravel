@@ -4,14 +4,14 @@
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Blog</h6>
         <br/>
-        <a class="btn btn-primary">Thêm</a>
+        <a class="btn btn-primary" href="{{url('/admin/bloganime/add')}}">Thêm</a>
     </div>
     <div class="card-body">
-        <div class="table">
+        <div class="table-responsive">
             <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                 <div class="row">
                     <div class="col-sm-12">
-                        <table class="table table-bordered" >
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 150%;">
                             <thead style="text-align: center;">
                                 <tr>
                                     <th>Mã Anime</th>
@@ -26,10 +26,10 @@
                                 @foreach ($ds as $item => $k)
                                 <tr>
                                     <td style="text-align: center;">{{$k->MaAnime}}</td>
-                                    <td style="text-align: center;"><img src="{{ $k->IDBlog }}" alt="Hình ảnh" width="50" height="50"></td>
+                                    <td style="text-align: center;">{{$k->IDBlog}}</td>
                                     <td style="text-align: center;">{{$k->Trailer}}</td>
                                     <td>
-                                        <a class="btn btn-primary" href="{{url('#'.$k->ID)}}">Sửa</a>
+                                        <a class="btn btn-primary" href="{{url('/admin/bloganime/edit/'.$k->ID)}}">Sửa</a>
                                     </td>                                    
                                     
                                 </tr>                       
@@ -41,7 +41,9 @@
                             @endif               
                             </tbody>
                         </table>
+                        @if (!empty($ds))
                         {{$ds->links()}}
+                        @endif
                     </div>
                 </div>
             </div>    

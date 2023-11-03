@@ -11,9 +11,10 @@ class goi extends Model
     protected $table = "tb_goi";
 
     public function getall(){
-        return DB::table($this->table)->get();
+        $goi = DB::select('SELECT * from tb_goi');        
+        return $goi;
     }
-    public function getdetail(){
+    public function getdetail($id){
         return DB::table($this->table)->where('MaGoi',$id)->get();
     }
 

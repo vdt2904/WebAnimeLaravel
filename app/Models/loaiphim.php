@@ -11,9 +11,10 @@ class loaiphim extends Model
     protected $table = "tb_loaiphim";
 
     public function getall(){
-        return DB::table($this->table)->get();
+        $lp = DB::select('SELECT * from tb_loaiphim');        
+        return $lp;
     }
-    public function getdetail(){
+    public function getdetail($id){
         return DB::table($this->table)->where('MaLP',$id)->get();
     }
 

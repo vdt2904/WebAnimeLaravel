@@ -10,10 +10,10 @@ class bloganime extends Model
     use HasFactory;
     protected $table = "tb_blog";
 
-    public function getall(){
-        return DB::table($this->table)->get();
+    public function getall(){       
+        return DB::select('SELECT * from tb_blog');
     }
-    public function getdetail(){
+    public function getdetail($id){
         return DB::table($this->table)->where('ID',$id)->get();
     }
 
