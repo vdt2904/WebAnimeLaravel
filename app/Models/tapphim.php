@@ -11,9 +11,9 @@ class tapphim extends Model
     protected $table = "tb_tapphim";
 
     public function getall(){
-        return DB::table($this->table)->get();
+        return DB::select('SELECT * from tb_tapphim');
     }
-    public function getdetail(){
+    public function getdetail($id){
         return DB::table($this->table)->where('MaTP',$id)->get();
     }
 
