@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\admin\dashboardController;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,12 +13,7 @@ use App\Http\Controllers\admin\dashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('HomeLayout');
-});
-Route::get('/login', function () {
-    return view('LoginHome');
-});
+
 Route::get('/admin/login', function () {
     return view('LoginAdmin');
 });

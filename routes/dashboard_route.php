@@ -24,7 +24,12 @@ use App\Http\Controllers\admin\TapPhimController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', function () {
+    return view('HomeLayout');
+});
+Route::get('/login', function () {
+    return view('LoginHome');
+});
 //dashboad
 Route::get('/admin/dashboard', [dashboardController::class, 'Index'])->name('dashboard')->middleware('checkAdminLogin');
 Route::get('/admin/users', [dashboardController::class, 'userlist']);
