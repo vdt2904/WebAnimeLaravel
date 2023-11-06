@@ -1,4 +1,5 @@
 <!-- Header Section Begin -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <header class="header">
     <div class="container">
         <div class="row">
@@ -33,7 +34,8 @@
             <div class="col-lg-2">
                 <div class="header__right">
                     <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                    <a href="{{url('/login')}}"><span class="icon_profile"></span></a>
+                    <a href="{{ url('/login') }}" class="profile-link"><span class="icon_profile"></span></a>
+                  
                 </div>
             </div>
         </div>
@@ -41,3 +43,22 @@
     </div>
 </header>
 <!-- Header End -->
+
+  <style>
+  .item-dropdown {
+   
+    font-family: "Mulish", sans-serif;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0; /* Dịch chuyển menu sang phải */
+  }
+
+  .profile-link:hover + .item-dropdown {
+    display: block;
+  }
+</style>
+

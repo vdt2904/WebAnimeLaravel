@@ -27,6 +27,18 @@
 </head>
 
 <body>
+   
+    @if(session('success'))
+    <div id="notic" style=" text-align: center ;background-color: #ffdd94; border-color: #c3e6cb; color: #9F44D3; padding: 10px; margin-bottom: 15px;">
+        {{ session('success') }}
+    </div>
+    
+    @endif
+    <script>
+        setTimeout(function() {
+            document.getElementById('notic').style.display = 'none';
+        }, 5000); 
+    </script>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
