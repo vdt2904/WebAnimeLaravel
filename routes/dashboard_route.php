@@ -22,6 +22,15 @@ use App\Http\Controllers\admin\TapPhimController;
 |
 */
 
+<<<<<<< Updated upstream
+=======
+Route::get('/', function () {
+    return view('HomeLayout');
+})->name('HomeLayout');
+Route::get('/login', function () {
+    return view('LoginHome');
+});
+>>>>>>> Stashed changes
 //dashboad
 Route::get('/admin/dashboard', [dashboardController::class,'Index'])->name('admin.dashboard');
 Route::get('/admin/users', [dashboardController::class,'userlist']);
@@ -33,17 +42,17 @@ Route::post('uploadblogs', [BlogsController::class,'uploadblogs'])->name('Blogs.
 Route::get('/admin/blogs/edit/{id}', [BlogsController::class,'edit']);
 Route::put('updateblogs', [BlogsController::class,'editblog'])->name('Blogs.updateblogs');
 //blog
-Route::get('/admin/bloganime', [BlogAniController::class,'BAlist'])->name('admin.bloganime');
-Route::get('/admin/bloganime/add', [BlogAniController::class,'create']);
-Route::post('uploadbloganime', [BlogAniController::class,'uploadtrailer'])->name('bloganime.uploadbloganime');
-Route::get('/admin/bloganime/edit/{id}', [BlogAniController::class,'edit']);
-Route::put('updateblogani', [BlogAniController::class,'editbla'])->name('bloganime.updateblogani');
+Route::get('/admin/bloganime', [BlogAniController::class, 'BAlist'])->name('admin.bloganime');
+Route::get('/admin/bloganime/add', [BlogAniController::class, 'create']);
+Route::post('uploadbloganime', [BlogAniController::class, 'uploadtrailer'])->name('bloganime.uploadbloganime');
+Route::get('/admin/bloganime/edit/{id}', [BlogAniController::class, 'edit']);
+Route::put('updateblogani', [BlogAniController::class, 'editbla'])->name('bloganime.updateblogani');
 //anime
-Route::get('/admin/animes', [AnimeController::class,'animelist'])->name('admin.animes');
-Route::get('/admin/animes/add', [AnimeController::class,'create']);
-Route::post('uploadanime', [AnimeController::class,'uploadanimes'])->name('animes.uploadanime');
-Route::get('/admin/animes/edit/{id}', [AnimeController::class,'edit']);
-Route::put('updateanime', [AnimeController::class,'edita'])->name('animes.updateanime');
+Route::get('/admin/animes', [AnimeController::class, 'animelist'])->name('admin.animes');
+Route::get('/admin/animes/add', [AnimeController::class, 'create']);
+Route::post('uploadanime', [AnimeController::class, 'uploadanimes'])->name('animes.uploadanime');
+Route::get('/admin/animes/edit/{id}', [AnimeController::class, 'edit']);
+Route::put('updateanime', [AnimeController::class, 'edita'])->name('animes.updateanime');
 //theloai
 Route::get('/admin/theloai', [TheLoaiController::class,'index'])->name('admin.theloai');
 Route::get('/admin/theloai/add', [TheLoaiController::class,'create']);
@@ -57,20 +66,28 @@ Route::post('addhangphim',[HangPhimController::class,'adddata'])->name('addhangp
 Route::get('/admin/hangphim/edit/{id}', [HangPhimController::class,'edit']);
 Route::put('updatehangphim', [HangPhimController::class,'edithp'])->name('hangphim.updatehangphim');
 //goi
-Route::get('/admin/goi', [GoiController::class,'index'])->name('admin.goi');
-Route::get('/admin/goi/add', [GoiController::class,'create']);
-Route::post('addgoi',[GoiController::class,'adddata'])->name('addgoi');
-Route::get('/admin/goi/edit/{id}', [GoiController::class,'edit']);
-Route::put('updategoi', [GoiController::class,'editg'])->name('goi.updategoi');
+Route::get('/admin/goi', [GoiController::class, 'index'])->name('admin.goi');
+Route::get('/admin/goi/add', [GoiController::class, 'create']);
+Route::post('addgoi', [GoiController::class, 'adddata'])->name('addgoi');
+Route::get('/admin/goi/edit/{id}', [GoiController::class, 'edit']);
+Route::put('updategoi', [GoiController::class, 'editg'])->name('goi.updategoi');
 //loaiphim
-Route::get('/admin/loaiphim', [LoaiPhimController::class,'index'])->name('admin.loaiphim');
-Route::get('/admin/loaiphim/add', [LoaiPhimController::class,'create']);
-Route::post('addloaiphim',[LoaiPhimController::class,'adddata'])->name('addloaiphim');
-Route::get('/admin/loaiphim/edit/{id}', [LoaiPhimController::class,'edit']);
-Route::put('updateloaiphim', [LoaiPhimController::class,'editlp'])->name('loaiphim.updateloaiphim');
+Route::get('/admin/loaiphim', [LoaiPhimController::class, 'index'])->name('admin.loaiphim');
+Route::get('/admin/loaiphim/add', [LoaiPhimController::class, 'create']);
+Route::post('addloaiphim', [LoaiPhimController::class, 'adddata'])->name('addloaiphim');
+Route::get('/admin/loaiphim/edit/{id}', [LoaiPhimController::class, 'edit']);
+Route::put('updateloaiphim', [LoaiPhimController::class, 'editlp'])->name('loaiphim.updateloaiphim');
 //TapPhim
+<<<<<<< Updated upstream
 Route::get('/admin/tapphim', [TapPhimController::class,'index'])->name('admin.tapphim');
 Route::get('/admin/tapphim/add', [TapPhimController::class,'create']);
 Route::post('addtapphim',[TapPhimController::class,'adddata'])->name('addtapphim');
 Route::get('/admin/tapphim/edit/{id}', [TapPhimController::class,'edit']);
 Route::put('updatetapphim', [TapPhimController::class,'edittp'])->name('tapphim.updatetapphim');
+=======
+Route::get('/admin/tapphim', [TapPhimController::class, 'index'])->name('admin.tapphim');
+Route::get('/admin/tapphim/add', [TapPhimController::class, 'create']);
+Route::post('addtapphim', [TapPhimController::class, 'adddata'])->name('addtapphim');
+Route::get('/admin/tapphim/edit/{id}', [TapPhimController::class, 'edit']);
+Route::put('updatetapphim', [TapPhimController::class, 'edittp'])->name('tapphim.updatetapphim');
+>>>>>>> Stashed changes

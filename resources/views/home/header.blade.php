@@ -19,12 +19,12 @@
                                     <li><a href="./categories.html">Categories</a></li>
                                     <li><a href="./anime-details.html">Anime Details</a></li>
                                     <li><a href="./anime-watching.html">Anime Watching</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href=" {{ url('/blog') }}">Blog Details</a></li>
                                     <li><a href="./signup.html">Sign Up</a></li>
                                     <li><a href="#">Login</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Our Blog</a></li>
+                            <li><a href="{{ url('/blog') }}">Our Blog</a></li>
                             <li><a href="#">Contacts</a></li>
                         </ul>
                     </nav>
