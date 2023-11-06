@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\admin\dashboardController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,22 +16,13 @@ use App\Http\Controllers\admin\dashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('HomeLayout');
-});
-Route::get('/login', function () {
-    return view('LoginHome');
-});
 Route::get('/admin/login', function () {
     return view('LoginAdmin');
 });
-<<<<<<< Updated upstream
-
-=======
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
 Route::post('/login', [LoginController::class, 'login'])->name('login.authenticate');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/signup', [UserRegisterController::class, 'index'])->name('signup');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 //---------------------------------------
 Route::post('/signup/add', [UserRegisterController::class, 'insertuser'])->name('adduser');
 //---------------------------------------
@@ -48,13 +40,8 @@ Route::get('/auth/google', function () {
 })->name('login.google');
 
 Route::get('/auth/callback/google', [LoginController::class, 'handleGoogleCallback']);
-//Blog
 Route::get('/blog', function () {
     return view('BlogLayout');
-})->name('ourblog');
-Route::get('/blog/{id}', [BlogController::class, 'detail'])->name('blogdetail');
-//Contact us
-Route::get('/contact', function () {
-    return view('ContactLayout');
-})->name('contactus');
->>>>>>> Stashed changes
+});
+Route::get('/blog/{id}', [BlogController::class, 'detail'])->name('blog.detail');
+Route::post('/blog/{id}', [BlogController::class, 'SendReview'])->name('blog.SendReview');

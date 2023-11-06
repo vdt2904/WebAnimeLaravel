@@ -37,7 +37,6 @@
     <!-- Hero Section Begin -->
     @yield('section')
     <!-- Hero Section End -->
-    <h1>{{ session('InforUser.Email') }}</h1>
     <!-- Product Section Begin -->
     <section class="product spad">
         <div class="container">

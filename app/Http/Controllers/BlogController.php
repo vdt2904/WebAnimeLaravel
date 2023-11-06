@@ -7,6 +7,9 @@ use App\Models\bloganime;
 use App\Models\blogss;
 use App\Models\review;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use DateTime;
+use DateTimeZone;
 
 class BlogController extends Controller
 {
@@ -28,11 +31,22 @@ class BlogController extends Controller
             ->join('tb_blog', 'MaAnime')->join('tb_ourblog', 'IDBlog')
             ->join('tb_nguoidung', 'MaND')->select('seclect * from tb_review ')->Where('MaAnime', 'ID');
 
-        //return view('BlogDetail', compact('data')); // Pass the data to the view using the compact function
+        return view('BlogDetail', compact('data')); // Pass the data to the view using the compact function
     }
     public function  SendReview(Request $request)
     {
         $newreview = new review();
-        $newreview->insertreview();
+        $now = new DateTime();
+        $timezone = new DateTimeZone('Asia/Ho_Chi_Minh'); // Chọn múi giờ mới, ví dụ 'Asia/Ho_Chi_Minh'
+        $time = $now->setTimezone($timezone)->format('Y-m-d ');
+        $newreview->insertreview(
+            [
+                'MaAnime' => $request->segment(2),
+                'MaND'    => $request->session()->get('InforUser.MaND'),
+                'Review'  => $request->input('review'),
+                'Rate'    => 5,
+                'NgayReview' =>  $time
+            ]
+        );
     }
 }
