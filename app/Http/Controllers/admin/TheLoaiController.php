@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\theloai;
 use App\Models\tdtm;
+use App\Models\tlanime;
 
 class TheLoaiController extends Controller
 {
@@ -68,5 +69,15 @@ class TheLoaiController extends Controller
         }
         $tl->updatedata($dataupdate, $MaTL);
         return redirect()->route('admin.theloai');
+    }
+    public function delete($id){
+        $tl= new theloai();
+        $tt = new tlanime();
+        $ttdetail = $tt->getdetail($id);
+        if(!empty($ttdetail)){
+            return redirect()->route('admin.theloai')->with('msg','Xóa không thành công');
+        }
+        $tl->deletedata($id);
+        return redirect()->route('admin.theloai')->with('msg','Xóa thành công');
     }
 }

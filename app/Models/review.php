@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class review extends Model
 {
     use HasFactory;
+    protected $table = "tb_review";
+    public function deletedata($id){
+        return DB::table($this->table)->where('ID',$id)->orWhere('MaAnime', $id)->delete();
+    }
 }

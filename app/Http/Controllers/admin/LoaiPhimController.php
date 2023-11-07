@@ -64,4 +64,9 @@ class LoaiPhimController extends Controller
         $lp->updatedata($dataupdate,$MaLP);
         return redirect()->route('admin.loaiphim');
     }
+    public function delete($id){
+        $del = new loaiphim();
+        $del->deletedata($id);
+        return redirect()->route('admin.loaiphim')->with('msg','Xóa thành công');
+    }
 }

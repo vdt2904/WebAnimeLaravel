@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use DB;
+use Illuminate\Support\Facades\DB;
 class tapphim extends Model
 {
     use HasFactory;
@@ -15,6 +15,9 @@ class tapphim extends Model
     }
     public function getdetail($id){
         return DB::table($this->table)->where('MaTP',$id)->get();
+    }
+    public function getbymaAnime($id){
+        return DB::table($this->table)->where('MaAnime',$id)->get();
     }
 
     public function insertdata($data){

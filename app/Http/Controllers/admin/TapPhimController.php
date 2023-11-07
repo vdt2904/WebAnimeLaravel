@@ -5,7 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\tapphim;
-use DB;
+use App\Models\viewss;
+use App\Models\commentss;
+use Illuminate\Support\Facades\DB;
 use App\Models\tdtm;
 class TapPhimController extends Controller
 {
@@ -28,8 +30,8 @@ class TapPhimController extends Controller
         return view('admin.tapphim.create',compact('maanime','ma'));
     }
     public function adddata(Request $request){
-        $folder = 'WebAnime/anime/'.$request->maanime.'/tap/tap'.$request->tap;
-        $publicId = 'ex'.$request->tap;
+        $folder = 'WebAnime/anime/'.$request->maanime.'/tap/';
+        $publicId = 'ep'.$request->tap;
         $publicId1 = 'im'.$request->tap;
         $response = cloudinary()->uploadVideo($request->file('video')->getRealPath(), [
             'public_id' => $publicId,
@@ -76,8 +78,8 @@ class TapPhimController extends Controller
         $tpdetail = $tp->getdetail($MaTP);
         if(!empty($tpdetail[0])){
             if(!empty($request->file('image'))&&!empty($request->file('video'))){
-                $folder = 'WebAnime/anime/'.$request->maanime.'/tap/tap'.$request->tap;
-                $publicId = 'ex'.$request->tap;
+                $folder = 'WebAnime/anime/'.$request->maanime.'/tap/';
+                $publicId = 'ep'.$request->tap;
                 $publicId1 = 'im'.$request->tap;
                 $response = cloudinary()->uploadVideo($request->file('video')->getRealPath(), [
                     'public_id' => $publicId,
@@ -103,5 +105,19 @@ class TapPhimController extends Controller
         }
         $tp->updatedata($dataupdate,$MaTP);
         return redirect()->route('admin.tapphim');
+    }
+    public function delete($id){
+        $tp = new tapphim();
+        $a = $tp->getdetail($id)->first();
+        $duongdan = 'WebAnime/anime/'.$a->MaAnime.'/tap/ep'.$a->tap;
+        cloudinary::destroy($duongdan,["resource_type" => "video"]);
+        $duongdan1 = 'WebAnime/anime/'.$a->MaAnime.'/tap/im'.$a->tap;
+        cloudinary::destroy($duongdan1);
+        $views = new viewss();
+        $views->deletadata($id);
+        $comments = new commentss();
+        $comments->deletadata($id);
+        $tp->deletedata($id);
+        return redirect()->route('admin.tapphim')->with('msg','Xóa thành công');
     }
 }

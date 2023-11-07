@@ -1,6 +1,8 @@
 @extends('AdminLayout')
 @section('main')
-
+@php
+    use Illuminate\Support\Facades\DB;
+@endphp
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Danh Sách Anime</h6>
         <br>
@@ -63,7 +65,11 @@
                                     @endif
                                     <td>
                                         <a class="btn btn-primary" href="{{url('/admin/animes/edit/'.$k->MaAnime)}}">Sửa</a>
-                                        <a class="btn btn-danger" href="#">Xóa</a>
+                                        <form action="{{ url('admin/deleteanime/'.$k->MaAnime) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
+                                        </form>
                                     </td>                                                                        
                                 </tr>                       
                                 @endforeach

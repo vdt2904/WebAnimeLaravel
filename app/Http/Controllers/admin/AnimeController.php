@@ -5,7 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Animess;
-use DB;
+use App\Models\tapphim;
+use App\Models\bloganime;
+use App\Models\tlanime;
+use App\Models\review;
+use Illuminate\Support\Facades\DB;
 use App\Models\tdtm;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
@@ -102,5 +106,25 @@ class AnimeController extends Controller
         }
         $ani->updatedata($dataupdate,$MaAnime);
         return redirect()->route('admin.animes');
+    }
+    public function delete($id){
+        $ani = new Animess();
+        $a = $ani->getdetail($id)->first();
+        $tp = new tapphim();
+        $b = $tp->getbymaAnime($id);
+        if(!empty($b)){
+            return redirect()->route('admin.animes')->with('msg','Xóa thất bại');
+        }
+        $blogani = new bloganime();
+        $blogani->deletedata($id);
+        $tlani = new tlanime();
+        $tlani->deletedata($id);
+        $rev = new review();
+        $rev->deletedata($id);
+        $duongdan = 'WebAnime/anime/'.$id.'/trailer/'.$id;
+        cloudinary::destroy($duongdan,["resource_type" => "video"]);
+        $duongdan1 = 'WebAnime/anime/'.$id.'/img/'.$id;
+        cloudinary::destroy($duongdan1);
+        return redirect()->route('admin.animes')->with('msg','Xóa thành công');
     }
 }

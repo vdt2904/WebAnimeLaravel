@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class viewss extends Model
 {
     use HasFactory;
+    protected $table = "tb_view";
+    public function deletedata($id){
+        return DB::table($this->table)->where('ID',$id)->orWhere('MaTP', $id)->delete();
+    }
 }

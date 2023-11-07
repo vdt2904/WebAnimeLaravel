@@ -5,7 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\bloganime;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Cloudinary\Api\Upload\UploadApi;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 class BlogAniController extends Controller
 {
     // 
@@ -80,5 +82,13 @@ class BlogAniController extends Controller
         }
         $anib->updatedata($dataupdate,$ID);
         return redirect()->route('admin.bloganime');
+    }
+    public function delete($id){
+        $blogani = new bloganime();
+        $a = $blogani->getdetail($id)->first();
+        $duongdan = 'WebAnime/anime/'.$a->MaAnime.'/trailer/'.$a->MaAnime;
+        cloudinary::destroy($duongdan,["resource_type" => "video"]);
+        $blogani->deletedata($id);
+        return redirect()->route('admin.bloganime')->with('msg','Xóa thành công');
     }
 }

@@ -15,9 +15,9 @@ use App\Http\Controllers\UserRegisterController;
 |
 */
 
-Route::get('/admin/login', function () {
-    return view('LoginAdmin');
-});
+// Route::get('/admin/login', function () {
+//     return view('LoginAdmin');
+// });
 Route::get('/login/authenticare', [LoginController::class, 'index'])->name('login.index');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/signup', [UserRegisterController::class, 'index'])->name('signup');
