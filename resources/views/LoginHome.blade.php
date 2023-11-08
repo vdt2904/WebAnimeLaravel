@@ -100,7 +100,7 @@
                                         Facebook</a></li>
                                 <li><a href="{{ route('login.google') }}" class="google"><i class="fa fa-google"></i>
                                         Sign in With Google</a></li>
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i> Sign in With
+                                <li><a href="{{ route('login.X') }}" class="twitter"><i class="fa fa-twitter"></i> Sign in With
                                         Twitter</a>
                                 </li>
                             </ul>

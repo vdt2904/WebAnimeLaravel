@@ -19,8 +19,8 @@ class UserRegisterController extends Controller
         $newuser = new Userss();
         $numberphoneRegex = '/^\d{10}$/';
         $cgmailRegex = '/^[a-zA-Z0-9._%+-]+@gmail\.com$/';
-        $cpasRegex = '/^[a-zA-Z0-9]{8}$/';
-        $cnameRegex = '/^[a-zA-Z]+(?:\s[a-zA-Z]+)*$/';
+        $cpasRegex = '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/';
+        $cnameRegex = '/^([a-zA-Z]+\s?)*[a-zA-Z]+$/';
         $pass = $request->Password;
         $repass = $request->CFPassword;
         $email = $request->Email;
@@ -52,8 +52,10 @@ class UserRegisterController extends Controller
             return redirect()->route('signup')->withErrors(['Phone number already exists']);
         }
 
-        $newuser->insertuser([
-            'MaND' => $count = Userss::count() + 1,
+        $lastMaND = Userss::max('MaND');
+        $newMaND = $lastMaND + 1;
+        $newuser->insertnd([
+            'MaND' => $newMaND + 1,
             'TenND' => $request->TenND,
             'Email' => $request->Email,
             'Password' => bcrypt($request->Password),

@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Kokomi;
 use Illuminate\Http\Request;
 use App\Models\Userss;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
-
+use Laravel\Socialite\Two\InvalidStateException;
+use App\Models\resetpass;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -32,48 +37,140 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $request->session()->forget('InforUser');
-        return redirect()->route('HomeLayout')->with('success', 'Logout successful!');;
+        return redirect()->route('HomeLayout')->with('success', 'Logout successful!');
     }
 
     public function handleFacebookCallback()
     {
         $user = Socialite::driver('facebook')->user();
+        // dd($user);
         $existingUser = Userss::where('email', $user->email)->first();
+        $newUser = new Userss();
 
         if ($existingUser) {
-            auth()->login($existingUser, true);
+            session()->put('InforUser', $user);
         } else {
-            $newUser = new Userss();
-            $newUser->TenND = $user->name;
-            $newUser->email = $user->email;
-            $newUser->password = bcrypt(123456);
-            $newUser->save();
-            //auth()->login($newUser, true);
-        }
+            $newMaND = Userss::max('MaND') + 1;
+            $newUser->insertnd([
+                'MaND'  =>  $newMaND,
+                'TenND' => $user->name,
+                'Email' => $user->email,
+                'Password' => bcrypt(12345678),
+                'SDT' => 1,
+                'LoaiND' => 1,
+            ]);
 
-        return redirect()->to('/');
+            session()->put('InforUser', $user);
+        }
+        return redirect()->route('HomeLayout')->with('success', 'Login successful! Welcome ' . $user->TenND);
+    }
+    public function handleTwitterCallback()
+    {
+        $user = Socialite::driver('twitter')->user();
+        // dd($user);
+        $existingUser = Userss::where('email', $user->email)->first();
+        $newUser = new Userss();
+
+        if ($existingUser) {
+            session()->put('InforUser', $user);
+        } else {
+            $newUser->insertnd([
+                'MaND'  => Userss::count() + 1,
+                'TenND' => $user->name,
+                'Email' => $user->email,
+                'Password' => bcrypt(12345678),
+                'SDT' => 1,
+                'LoaiND' => 1,
+            ]);
+
+            session()->put('InforUser', $user);
+        }
+        return redirect()->route('HomeLayout')->with('success', 'Login successful! Welcome ' . $user->TenND);
     }
     public function handleGoogleCallback()
     {
         $user = Socialite::driver('google')->user();
-        $existingUser = Userss::where('email', $user->email)->first();
+        //dd($user);
+        $existingUser = Userss::where('Email', $user->email)->first();
+        $newUser = new Userss();
 
         if ($existingUser) {
-            auth()->login($existingUser, true);
+            session()->put('InforUser', $existingUser);
         } else {
-            $newUser = new Userss();
-            $newUser->insertuser([
-                'MaND' => Userss::count() + 1,
+            $lastMaND = Userss::max('MaND');
+            $newMaND = $lastMaND + 1;
+            $newUser->insertnd([
+                'MaND'  =>  $newMaND,
                 'TenND' => $user->name,
                 'Email' => $user->email,
-                'Password' => bcrypt(123456),
-                'SDT' => '0',
+                'Password' => bcrypt(12345678),
+                'SDT' => 1,
                 'LoaiND' => 1,
-
             ]);
-            Auth::login($newUser, true);
+
+            session()->put('InforUser', $user);
+        }
+        return redirect()->route('HomeLayout')->with('success', 'Login successful! Welcome ' . $user->name);
+    }
+
+    public function ForgotPassword()
+    {
+        return view('ForgotPassword');
+    }
+    public function SendEmail(Request $request)
+    {
+        $resetpassword = new resetpass();
+        $user = Userss::where('Email', $request->Email)->first();
+        if (!$user) {
+            return redirect()->route('ForgotPassword')->withErrors(['Email not found!']);
+        } else {
+            $token = Str::random(64);
+            $request->session()->put('token', $token);
+            $details = [
+                'link' => Route('GetResetPassword', ['token' => $token]),
+                'time' => date('Y-m-d H:i:s')
+
+            ];
+            $currentDateTime = date('Y-m-d H:i:s');
+            $resetpassword->insertresetpass([
+                'ID' => resetpass::max('ID') + 1,
+                'Email' => $request->Email,
+                'Token' => $token,
+                'MaND' => $user->MaND,
+                'NewPass' => $user->Password,
+                'Time' => $currentDateTime,
+            ]);
+            Mail::to($request->Email)->send(new Kokomi($details));
+            return redirect()->route('ForgotPassword')->with('success', 'Send email successful!');
+        }
+    }
+
+    public function ChangePassword(Request $request)
+    {
+        $expirationTime = now()->subMinutes(5);
+        $resetpassword = resetpass::where('Token', session('token'))->first();
+
+        if (!$resetpassword) {
+            return redirect()->route('ForgotPassword')->withErrors(['Invalid or expired token!']);
         }
 
-        return redirect()->route('HomeLayout');
+        if (!is_null($resetpassword->created_at)) {
+            if ($resetpassword->created_at->lt($expirationTime)) {
+                $resetpassword->deleteresetpass(session('token'));
+                return redirect()->route('ForgotPassword')->withErrors(['Token has expired!']);
+            }
+        } else {
+            $resetpassword->deleteresetpass(session('token'));
+            $rgxpassword = '/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/';
+            if (!preg_match($rgxpassword, $request->password)) {
+                return redirect()->route('ResetPassword')->withErrors(['Password must be 8 characters long and contain only letters and numbers!']);
+            } else {
+                $user = Userss::where('Email', $resetpassword->Email)->first();
+                $user->updatend($user->Email, [
+                    'Password' => bcrypt($request->password),
+                ]);
+                return redirect()->route('LoginHome')->with('success', 'Change password successful!');
+            }
+        }
     }
 }
