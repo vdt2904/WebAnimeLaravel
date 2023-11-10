@@ -25,12 +25,9 @@ use App\Http\Controllers\admin\TLAnimeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('HomeLayout');
-});
 Route::get('/login', function () {
     return view('LoginHome');
-});
+})->name('LoginHome');
 //loginAdmin
 Route::get('/admin/loginadmin', [loginAdminController::class, 'index']);
 Route::post('/admin/loginadmin/login', [loginAdminController::class, 'login'])->name('login');

@@ -36,6 +36,16 @@ class AnimeController extends Controller
         return view('admin.animes.create',compact('mahp','ma','malp'));
     }
     public function uploadanimes(Request $request){
+        $request->validate([
+            'anime' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],[
+            'anime.required' => 'Tên anime không được để trống',
+            'image.required' => 'Ảnh không được để trống',
+            'image.image' => 'File phải là hình ảnh',
+            'image.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif',
+            'image.max' => 'Dung lượng hình ảnh không được vượt quá 2MB',
+        ]);
         $folder = 'WebAnime/anime/'.$request->maanime.'/img';
         $publicId = $request->maanime;
         $response = cloudinary()->upload($request->file('image')->getRealPath(), [

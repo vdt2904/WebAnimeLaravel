@@ -30,6 +30,7 @@ class TapPhimController extends Controller
         return view('admin.tapphim.create',compact('maanime','ma'));
     }
     public function adddata(Request $request){
+        set_time_limit(120);
         $folder = 'WebAnime/anime/'.$request->maanime.'/tap/';
         $publicId = 'ep'.$request->tap;
         $publicId1 = 'im'.$request->tap;
@@ -73,6 +74,7 @@ class TapPhimController extends Controller
         return view('admin.tapphim.edit',compact('tpdetail','maanime'));
     }
     public function edittp(Request $request){
+        set_time_limit(180);
         $MaTP = $request->session()->get('MaTP');
         $tp = new tapphim();
         $tpdetail = $tp->getdetail($MaTP);
