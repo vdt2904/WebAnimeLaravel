@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Goi;
 use App\Models\tdtm;
+use App\Models\thanhtoan;
 class GoiController extends Controller
 {
     //
@@ -68,5 +69,15 @@ class GoiController extends Controller
         }        
         $g->updatedata($dataupdate,$MaGoi);
         return redirect()->route('admin.goi');
+    }
+    public function delete($id){
+        $g= new Goi();
+        $tt = new thanhtoan();
+        $ttdetail = $tt->getdetail($id);
+        if(!empty($ttdetail)){
+            return redirect()->route('admin.goi')->with('msg','Xóa không thành công');
+        }
+        $g->deletedata($id);
+        return redirect()->route('admin.goi')->with('msg','Xóa thành công');
     }
 }

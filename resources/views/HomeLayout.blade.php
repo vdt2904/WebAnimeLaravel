@@ -35,7 +35,7 @@
     @include('home.header')
 
     <!-- Hero Section Begin -->
-    @yield('section')
+    <!-- @yield('section') -->
     <!-- Hero Section End -->
 
     <!-- Product Section Begin -->

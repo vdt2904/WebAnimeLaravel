@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blogss;
 use Cloudinary\Api\Upload\UploadApi;
-
+use App\Models\bloganime;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class BlogsController extends Controller
@@ -76,7 +76,7 @@ class BlogsController extends Controller
                 $response = cloudinary()->upload($request->file('image')->getRealPath(), 
                 ['folder' => $folder,])->getSecurePath();                
                // $uploadApi= cloudinary()->destroy('img/'.$publicId);
-                cloudinary::destroy('WebAnime/img/blog/'.$publicId);
+                cloudinary::destroy('WebAnime/blog/img/'.$publicId);
             }else{
                 $response = $blogdetail[0]->Anh;
             }
@@ -91,6 +91,19 @@ class BlogsController extends Controller
         $blo->updateblogs($dataupdate,$IDBlog);
         return redirect()->route('admin.blogs');
     }
-
+    public function delete($id){
+        $blogani = new bloganime();
+        $a = $blogani->getdetail($id);
+        if(!empty($a)){
+            return redirect()->route('admin.blogs')->with('msg','Xóa không thành công');
+        }
+        $blo = new blogss();
+        $blogdetail = $blo->getdetail($IDBlog);
+        $parts = pathinfo($blogdetail[0]->Anh);
+        $publicId = $parts['filename']; 
+        cloudinary::destroy('WebAnime/blog/img/'.$publicId);
+        $blo->deletedata($id);
+        return redirect()->route('admin.blogs')->with('msg','Xóa thành công');
+    }
     
 }
