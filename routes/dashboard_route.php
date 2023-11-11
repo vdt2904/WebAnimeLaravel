@@ -13,7 +13,12 @@ use App\Http\Controllers\admin\logoutAdminController;
 use App\Http\Controllers\admin\GoiController;
 use App\Http\Controllers\admin\LoaiPhimController;
 use App\Http\Controllers\admin\TapPhimController;
-
+use App\Http\Controllers\searchController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\logoutController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\goiUserController;
+use App\Http\Controllers\HistoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,9 +33,9 @@ use App\Http\Controllers\admin\TapPhimController;
 Route::get('/', function () {
     return view('HomeLayout');
 })->name('HomeLayout');
-Route::get('/login', function () {
-    return view('LoginHome');
-})->name('LoginHome');
+// Route::get('/login', function () {
+//     return view('LoginHome');
+// })->name('LoginHome');
 //dashboad
 Route::get('/admin/dashboard', [dashboardController::class, 'Index'])->name('dashboard')->middleware('checkAdminLogin');
 Route::get('/admin/users', [dashboardController::class, 'userlist']);
@@ -88,3 +93,16 @@ Route::get('/admin/tapphim/add', [TapPhimController::class, 'create']);
 Route::post('addtapphim', [TapPhimController::class, 'adddata'])->name('addtapphim');
 Route::get('/admin/tapphim/edit/{id}', [TapPhimController::class, 'edit']);
 Route::put('updatetapphim', [TapPhimController::class, 'edittp'])->name('tapphim.updatetapphim');
+//SearchUser
+Route::get('/search', [searchController::class, 'index'])->name('search.index');
+//user
+Route::get('/User', [UserController::class, 'index'])->name('user.index');
+//login User
+Route::get('/Login', [LoginController::class, 'index'])->name('LoginHome');
+//logout User
+Route::get('/logout', [logoutController::class, 'logout'])->name('logoutUser');
+//goiUser
+Route::get('/goiUser', [goiUserController::class, 'index'])->name('goiLayout');
+//History
+Route::get('/History', [HistoryController::class, 'index'])->name('history');
+Route::post('/History/purchase', [HistoryController::class, 'purchase'])->name('purchase');
