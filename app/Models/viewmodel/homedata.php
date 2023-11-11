@@ -194,4 +194,29 @@ class homedata extends Model
         ];
         return $data;
     }
+    public function caro(){
+        $a = DB::select('SELECT
+                    a.MaAnime,
+                    tl.MaTL,
+                    tl.TheLoai
+                from tb_anime a
+                join tb_tlanime tla on tla.MaAnime = a.MaAnime
+                join tb_theloai tl on tl.MaTL = tla.MaTL       
+        ');
+        $b = DB::select('SELECT
+                    a.MaAnime,
+                    a.AnhNgang,
+                    a.LP,
+                    a.Anime
+                from tb_anime a
+                join tb_blog bl on bl.MaAnime = a.MaAnime  
+                where bl.IDBLog = (SELECT Max(IDBlog) from tb_ourblog)
+                Order by Rand()
+                Limit 3     
+        ');
+        $data=[
+            $b,$a
+        ];
+        return $data;
+    }
 }

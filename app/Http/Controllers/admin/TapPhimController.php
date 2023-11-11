@@ -30,7 +30,7 @@ class TapPhimController extends Controller
         return view('admin.tapphim.create',compact('maanime','ma'));
     }
     public function adddata(Request $request){
-        set_time_limit(120);
+        set_time_limit(180);
         $folder = 'WebAnime/anime/'.$request->maanime.'/tap/';
         $publicId = 'ep'.$request->tap;
         $publicId1 = 'im'.$request->tap;

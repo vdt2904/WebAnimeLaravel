@@ -13,7 +13,7 @@ class topview extends Model
         $a = DB::select('SELECT
                 a.MaAnime,
                 a.Anime,
-                a.Anh,
+                a.AnhNgang,
                 a.LP,
                 a.TongSoTap,
                 MAX(tp.Tap) AS MaxTap,
@@ -27,7 +27,7 @@ class topview extends Model
             GROUP BY
                 a.MaAnime,
                 a.Anime,
-                a.Anh,
+                a.AnhNgang,
                 a.LP,
                 a.TongSoTap
             ORDER BY
@@ -40,7 +40,7 @@ class topview extends Model
         $a = DB::select('SELECT
                 a.MaAnime,
                 a.Anime,
-                a.Anh,
+                a.AnhNgang,
                 a.LP,
                 a.TongSoTap,
                 MAX(tp.Tap) AS MaxTap,
@@ -54,7 +54,7 @@ class topview extends Model
             GROUP BY
                 a.MaAnime,
                 a.Anime,
-                a.Anh,
+                a.AnhNgang,
                 a.LP,
                 a.TongSoTap
             ORDER BY
@@ -66,7 +66,7 @@ class topview extends Model
         $a = DB::select("SELECT
             a.MaAnime,
             a.Anime,
-            a.Anh,
+            a.AnhNgang,
             a.LP,
             a.TongSoTap,
             MAX(tp.Tap) AS MaxTap,
@@ -81,7 +81,7 @@ class topview extends Model
         GROUP BY
             a.MaAnime,
             a.Anime,
-            a.Anh,
+            a.AnhNgang,
             a.LP,
             a.TongSoTap
         ORDER BY
@@ -93,7 +93,7 @@ class topview extends Model
         $a = DB::select('SELECT
                 a.MaAnime,
                 a.Anime,
-                a.Anh,
+                a.AnhNgang,
                 a.LP,
                 a.TongSoTap,
                 MAX(tp.Tap) AS MaxTap,
@@ -107,7 +107,7 @@ class topview extends Model
             GROUP BY
                 a.MaAnime,
                 a.Anime,
-                a.Anh,
+                a.AnhNgang,
                 a.LP,
                 a.TongSoTap
             ORDER BY

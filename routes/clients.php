@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\clients\apilayoutController;
 use App\Http\Controllers\clients\HomeController;
+use App\Http\Controllers\clients\categoryController;
+use App\Http\Controllers\clients\animewatchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +16,14 @@ use App\Http\Controllers\clients\HomeController;
 |
 */
 Route::get('/', [HomeController::class, 'index']);
+
+Route::get('home/trending', [categoryController::class, 'trending']);
+Route::get('home/popular', [categoryController::class, 'popular']);
+Route::get('home/liveaction', [categoryController::class, 'liveaction']);
+Route::get('home/recently', [categoryController::class, 'recently']);
+Route::get('home/category/{id}', [categoryController::class, 'category'])->name('category');
+
+Route::get('home/watch/{maanime}/{matp}', [animewatchController::class, 'watch'])->name('watch');
 
 Route::get('api/topday', [apilayoutController::class, 'topday']);
 Route::get('api/topweek', [apilayoutController::class, 'topweek']);

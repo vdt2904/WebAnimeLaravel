@@ -45,7 +45,7 @@
                 const len = response.length;
                 let table = '';
                 for (var i = len - 1; i >= 0; --i) {
-                    table = table + '<div class="product__sidebar__view__item set-bg" style="width: 360px; height: 190px; background-image: url(' + response[i].Anh + ');" >';
+                    table = table + '<div class="product__sidebar__view__item set-bg" style="width: 360px; height: 190px; background-image: url(' + response[i].AnhNgang + ');" >';
                     if(response[i].TongSoTap == null){
                         table = table + '<div class="ep">' + response[i].MaxTap +'/??</div>';
                     }else{
@@ -78,7 +78,7 @@
                 const len = response.length;
                 let table = '';
                 for (var i = len - 1; i >= 0; --i) {
-                    table = table + '<div class="product__sidebar__view__item set-bg" style="width: 360px; height: 190px; background-image: url(' + response[i].Anh + ');" >';
+                    table = table + '<div class="product__sidebar__view__item set-bg" style="width: 360px; height: 190px; background-image: url(' + response[i].AnhNgang + ');" >';
                     if(response[i].TongSoTap == null){
                         table = table + '<div class="ep">' + response[i].MaxTap +'/??</div>';
                     }else{
@@ -111,7 +111,7 @@
                 const len = response.length;
                 let table = '';
                 for (var i = len - 1; i >= 0; --i) {
-                    table = table + '<div class="product__sidebar__view__item set-bg" style="width: 360px; height: 190px; background-image: url(' + response[i].Anh + ');" >';
+                    table = table + '<div class="product__sidebar__view__item set-bg" style="width: 360px; height: 190px; background-image: url(' + response[i].AnhNgang + ');" >';
                     if(response[i].TongSoTap == null){
                         table = table + '<div class="ep">' + response[i].MaxTap +'/??</div>';
                     }else{
@@ -144,7 +144,7 @@
                 const len = response.length;
                 let table = '';
                 for (var i = len - 1; i >= 0; --i) {
-                    table = table + '<div class="product__sidebar__view__item set-bg" style="width: 360px; height: 190px; background-image: url(' + response[i].Anh + ');" >';
+                    table = table + '<div class="product__sidebar__view__item set-bg" style="width: 360px; height: 190px; background-image: url(' + response[i].AnhNgang + ');" >';
                     if(response[i].TongSoTap == null){
                         table = table + '<div class="ep">' + response[i].MaxTap +'/??</div>';
                     }else{
