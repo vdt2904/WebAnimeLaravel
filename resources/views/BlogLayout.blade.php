@@ -28,7 +28,7 @@
 
 <body>
     @include('home.header')
-    @yield('section')
+    
     <!-- Normal Breadcrumb Begin -->
     <section class="normal-breadcrumb set-bg" data-setbg="Home/img/normal-breadcrumb.jpg">
         <div class="container">
@@ -50,110 +50,159 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="row">
+                @if(!empty($data[0]))
                         <div class="col-lg-12">
-                            <div class="blog__item set-bg" data-setbg="Home/img/blog/blog-1.jpg">
+                            <div class="blog__item set-bg" data-setbg="{{ $data[0] ->Anh }}">
                                 <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Yuri Kuma Arashi Viverra Tortor Pharetra</a></h4>
+                                    <p><span class="icon_calendar"></span>{{ $data[0] ->NgayDang }} </p>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[0]->MaAnime]) }}">{{$data[0]->TenBlog }}</a></h4>
                                 </div>
                             </div>
                         </div>
+                    
+                    @else
+                     <h1>Don't have Blog</h1>
+                    @endif
+                    @if(!empty($data[1]))
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item small__item set-bg" data-setbg="Home/img/blog/blog-4.jpg">
+                            <div class="blog__item small__item set-bg" data-setbg="{{ $data[1] ->Anh }}">
                                 <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Bok no Hero Academia Season 4 – 18</a></h4>
+                                    <p><span class="icon_calendar"></span> {{ $data[1]->NgayDang }}</p>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[1]->MaAnime]) }}">{{ $data[1] ->TenBlog }}8</a></h4>
                                 </div>
                             </div>
                         </div>
+                        @endif
+                        @if(!empty($data[2]))
+                        
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item small__item set-bg" data-setbg="Home/img/blog/blog-5.jpg">
+                            <div class="blog__item small__item set-bg" data-setbg=" {{ $data[2] ->Anh }}">
                                 <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Fate/Stay Night: Untimated Blade World</a></h4>
+                                    <p><span class="icon_calendar"></span>   {{ $data[2] ->NgayDang }}</p>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[2]->MaAnime]) }}"> {{ $data[2] ->TenBlog }}</a></h4>
                                 </div>
                             </div>
                         </div>
+                        @endif
+                    
+                        @if(!empty($data[3]))
+                        
                         <div class="col-lg-12">
-                            <div class="blog__item set-bg" data-setbg="Home/img/blog/blog-7.jpg">
+                            <div class="blog__item set-bg" data-setbg="{{ $data[3] ->Anh }}">
                                 <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Housekishou Richard shi no Nazo Kantei Season 08 - 20</a></h4>
+                                    <p><span class="icon_calendar"></span> {{ $data[2] ->NgayDang}}</p>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[3]->MaAnime]) }}">{{ $data[3] ->TenBlog }}</a></h4>
                                 </div>
                             </div>
                         </div>
+                        @endif
+                        @if(!empty($data[4]))
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item small__item set-bg" data-setbg="Home/img/blog/blog-10.jpg">
+                            <div class="blog__item small__item set-bg" data-setbg="{{ $data[4] ->Anh }}">
                                 <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Fate/Stay Night: Untimated Blade World</a></h4>
+                                    <p><span class="icon_calendar"></span> {{ $data[3] ->NgayDang }}</p>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[2]->MaAnime]) }}">{{ $data[4] ->TenBlog }}</a></h4>
                                 </div>
                             </div>
                         </div>
+                    
+                    @endif
+                       
+                        @if(!empty($data[5]))
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item small__item set-bg" data-setbg="Home/img/blog/blog-11.jpg">
+                            <div class="blog__item small__item set-bg" data-setbg="{{ $data[5] ->Anh }}">
                                 <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Building a Better LiA Drilling Down</a></h4>
+                                    <p><span class="icon_calendar"></span> {{ $data[5] ->NgayDang }}</p>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[5]->MaAnime]) }}">{{ $data[5] ->TenBlog}} </a></h4>
                                 </div>
                             </div>
                         </div>
+                       
+                      @endif
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="row">
+                        @if(!empty($data[6]))
+                        
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item small__item set-bg" data-setbg="Home/img/blog/blog-2.jpg">
+                            <div class="blog__item small__item set-bg" data-setbg="{{ $data[6] ->Anh }}">
                                 <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Fate/Stay Night: Untimated Blade World</a></h4>
+                                    <p><span class="icon_calendar"></span> {{ $data[6] ->NgayDang }}</p>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[6]->MaAnime]) }}">{{ $data[6] ->TenBlog }}</a></h4>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item small__item set-bg" data-setbg="Home/img/blog/blog-3.jpg">
+                    
+                    @endif
+                    @if(!empty($data[7]))
+                       <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item small__item set-bg" data-setbg="{{ $data[7] ->Anh }}">
                                 <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Building a Better LiA Drilling Down</a></h4>
+                                    <p><span class="icon_calendar"></span> {{ $data[7] ->NgayDang }}</p>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[7]->MaAnime]) }}">{{ $data[7] ->TenBlog }}</a></h4>
                                 </div>
                             </div>
                         </div>
+                    @endif
+                    @if(!empty($data[8]))
+                       
+                         <div class="col-lg-12">
+                            <div class="blog__item set-bg" data-setbg="{{ $data[8] ->Anh }}">
+                                <div class="blog__item__text">
+                                    <p><span class="icon_calendar"></span>{{ $data[8] ->NgayDang }}</p>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[8]->MaAnime]) }}">{{ $data[8] ->TenBlog }}</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    @endif
+                    @if(!empty($data[9]))
+                    
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item small__item set-bg" data-setbg="{{ $data[9] ->Anh }}">
+                                <div class="blog__item__text">
+                                    <p><span class="icon_calendar"></span>{{ $data[9] ->NgayDang }}</p>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[9]->MaAnime]) }}">{{ $data[9] ->TenBlog }}</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    @endif
+                    @if(!empty($data[10]))
+                    
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="blog__item small__item set-bg" data-setbg="{{ $data[10] ->Anh }}">
+                                <div class="blog__item__text">
+                                    <p><span class="icon_calendar"></span> {{ $data[10] ->NgayDang }}0</p>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[10]->MaAnime]) }}">{{ $data[10] ->TenBlog }}</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    @if(!empty($data[11]))
+                    
                         <div class="col-lg-12">
-                            <div class="blog__item set-bg" data-setbg="Home/img/blog/blog-6.jpg">
+                            <div class="blog__item set-bg" data-setbg="{{ $data[11] ->Anh }}">
                                 <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Yuri Kuma Arashi Viverra Tortor Pharetra</a></h4>
+                                    <p><span class="icon_calendar"></span> {{ $data[11] ->Anh }}</p>
+                                    <h4<a href="{{ route('blog.detail', ['id' => $data[11]->MaAnime]) }}">{{ $data[11] ->TenBlog }}</a></h4>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item small__item set-bg" data-setbg="Home/img/blog/blog-8.jpg">
-                                <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Bok no Hero Academia Season 4 – 18</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item small__item set-bg" data-setbg="Home/img/blog/blog-9.jpg">
-                                <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Fate/Stay Night: Untimated Blade World</a></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="blog__item set-bg" data-setbg="Home/img/blog/blog-12.jpg">
-                                <div class="blog__item__text">
-                                    <p><span class="icon_calendar"></span> 01 March 2020</p>
-                                    <h4><a href="#">Yuri Kuma Arashi Viverra Tortor Pharetra</a></h4>
-                                </div>
-                            </div>
-                        </div>
+                    
+                     @endif
                     </div>
                 </div>
             </div>
+            <div class="custom-pagination">
+                <ul class="pagination" style=" color: white;">
+                    {{ $data->links() }}</ul>
+            </div>
+            
+            
         </div>
+     
     </section>
     <!-- Blog Section End -->
     <!-- Footer Section Begin -->
@@ -162,9 +211,9 @@
     <!-- Search model Begin -->
     @include('home.search')
     <!-- Search model end -->
-   <!-- Js Plugins -->
-
+    <!-- Js Plugins -->
     @include('home.script')
+    
 </body>
 
 </html>

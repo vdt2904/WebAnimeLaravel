@@ -42,9 +42,7 @@ Route::get('/auth/twitter', function () {
     return Socialite::driver('twitter')->redirect();
 })->name('login.X');
 Route::get('/auth/callback/twitter', [LoginController::class, 'handleTwitterCallback']);
-Route::get('/blog', function () {
-    return view('BlogLayout');
-});
+Route::get('/blog', [BlogController::class, 'index'])->name('BlogLayout');
 Route::get('/blog/{id}', [BlogController::class, 'detail'])->name('blog.detail');
 Route::post('/blog/{id}', [BlogController::class, 'SendReview'])->name('blog.SendReview');
 // Contact
@@ -62,3 +60,5 @@ Route::get('/resetpassword/{token}', function () {
 Route::post('/resetpassword', [LoginController::class, 'ChangePassword'])->name('ResetPassword');
 //FilmDetails
 Route::get('/filmdetails/{id}', [FilmDetailsController::class, 'index'])->name('filmdetails');
+Route::post('/rate-anime/{id}', [YourController::class, 'rateAnime'])->name('rate-anime');
+Route::post('/review-anime/{id}', [FilmDetailsController::class, 'SendReview'])->name('SendReview');
