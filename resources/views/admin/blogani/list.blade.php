@@ -30,6 +30,12 @@
                                     <td style="text-align: center;">{{$k->Trailer}}</td>
                                     <td>
                                         <a class="btn btn-primary" href="{{url('/admin/bloganime/edit/'.$k->ID)}}">Sửa</a>
+                                        <form action="{{ url('admin/deleteblogani/'.$k->ID) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
+                                        </form>
+                                        
                                     </td>                                    
                                     
                                 </tr>                       

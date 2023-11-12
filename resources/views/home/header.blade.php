@@ -1,11 +1,14 @@
 <!-- Header Section Begin -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+@php
+    use Illuminate\Support\Facades\DB;
+@endphp
 <header class="header">
     <div class="container">
         <div class="row">
             <div class="col-lg-2">
                 <div class="header__logo">
-                    <a href="./index.html">
+                    <a href="/">
                         <img src="/Home/img/logo.png" alt="">
                     </a>
                 </div>
@@ -14,15 +17,15 @@
                 <div class="header__nav">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Homepage</a></li>
-                            <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
+                            <li class="active"><a href="/">Trang chủ</a></li>
+                            <li><a href="#">Thể loại <span class="arrow_carrot-down"></span></a>
                                 <ul class="dropdown">
-                                    <li><a href="./categories.html">Categories</a></li>
-                                    <li><a href="./anime-details.html">Anime Details</a></li>
-                                    <li><a href="./anime-watching.html">Anime Watching</a></li>
-                                    <li><a href=" {{ url('/blog') }}">Blog Details</a></li>
-                                    <li><a href="./signup.html">Sign Up</a></li>
-                                    <li><a href="#">Login</a></li>
+                                    @php
+                                        $a = DB::select('SELECT theloai,MaTL from tb_theloai');
+                                    @endphp
+                                    @foreach ($a as $item => $k)
+                                    <li><a href="{{ route('category', ['id' => $k->MaTL]) }}">{{$k->theloai}}</a></li>    
+                                    @endforeach
                                 </ul>
                             </li>
                             <li><a href="{{ url('/blog') }}">Our Blog</a></li>

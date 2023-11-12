@@ -64,4 +64,9 @@ class HangPhimController extends Controller
         $hp->updatedata($dataupdate,$MaHP);
         return redirect()->route('admin.hangphim');
     }
+    public function delete($id){
+        $del = new hangphim();
+        $del->deletedata($id);
+        return redirect()->route('admin.hangphim')->with('msg','Xóa thành công');
+    }
 }

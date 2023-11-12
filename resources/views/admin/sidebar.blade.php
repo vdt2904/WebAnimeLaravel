@@ -31,7 +31,7 @@
                 <a class="collapse-item" href="{{url('/admin/animes')}}">Anime</a>
                 <a class="collapse-item" href="{{url('/admin/tapphim')}}">Tập Phim</a>
                 <a class="collapse-item" href="{{url('/admin/theloai')}}">The loai</a>               
-                <a class="collapse-item" href="cards.html">The loai của phim</a>
+                <a class="collapse-item" href="{{url('/admin/tlanime')}}">The loai của phim</a>
                 <a class="collapse-item" href="{{url('/admin/hangphim')}}">Hãng phim</a>
                 <a class="collapse-item" href="{{url('/admin/loaiphim')}}">Loại phim</a>
             </div>

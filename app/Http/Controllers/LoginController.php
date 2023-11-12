@@ -19,6 +19,7 @@ class LoginController extends Controller
     {
         return view('LoginHome');
     }
+
     public function login(Request $request)
     {
         $user = Userss::where('Email', $request->Email)->first();
@@ -33,6 +34,16 @@ class LoginController extends Controller
     {
         $request->session()->forget('InforUser');
         return redirect()->route('HomeLayout')->with('success', 'Logout successful!');;
+    }
+
+    public function authenticate(Request $request)
+    {
+        $user = Userss::where('Email', $request->Email)->first();
+        if ($user && Hash::check($request->Password, $user->Password)) {
+            return redirect()->route('HomeLayout');
+        } else {
+            return redirect()->route('LoginHome')->withErrors(['Email hoặc mật khẩu không đúng']);
+        }
     }
 
     public function handleFacebookCallback()

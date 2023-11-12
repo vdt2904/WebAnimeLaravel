@@ -10,7 +10,6 @@ class UserRegisterController extends Controller
 {
     public function index()
     {
-
         return view('SignupHome');
     }
 
@@ -27,6 +26,7 @@ class UserRegisterController extends Controller
         $name = $request->TenND;
         $numberphone = $request->SDT;
         if (!preg_match($cgmailRegex, $email)) {
+
             return redirect()->route('signup')->withErrors(['Invalid email']);
         }
         if (Userss::where('Email', '=', $email)->exists()) {
@@ -50,6 +50,28 @@ class UserRegisterController extends Controller
 
         if (Userss::where('SDT', '=', $numberphone)->exists()) {
             return redirect()->route('signup')->withErrors(['Phone number already exists']);
+        }
+        if (Userss::where('Email', '=', $email)->exists()) {
+            return redirect()->route('signup')->withErrors(['Email đã tồn tại']);
+        }
+        if (!preg_match($cnameRegex, $name)) {
+            return redirect()->route('signup')->withErrors(['Tên không hợp lệ']);
+        }
+
+        if (!preg_match($cpasRegex, $pass)) {
+            return redirect()->route('signup')->withErrors(['Mật khẩu không hợp lệ']);
+        }
+
+        if ($pass != $repass) {
+            return redirect()->route('signup')->withErrors(['Mật khẩu không trùng khớp']);
+        }
+
+        if (!preg_match($numberphoneRegex, $numberphone)) {
+            return redirect()->route('signup')->withErrors(['Số điện thoại không hợp lệ']);
+        }
+
+        if (Userss::where('SDT', '=', $numberphone)->exists()) {
+            return redirect()->route('signup')->withErrors(['Số điện thoại đã tồn tại']);
         }
 
         $newuser->insertuser([
