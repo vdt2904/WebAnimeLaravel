@@ -51,7 +51,7 @@
                         <img src="{{ $data[0]->Anh }}" alt="">
                     </div>
                 </div>
-                <?php $text = "Your text here";
+                <?php $text = $data[0]->ThongTin;
                 $wordCount = str_word_count($text, 0); // Count the number of words
                 $halfWordCount = ceil($wordCount / 2); // Calculate half of the word count
                 
