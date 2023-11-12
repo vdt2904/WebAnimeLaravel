@@ -11,6 +11,17 @@
             reader.readAsDataURL(fileInput.files[0]);
         }
     });
+    document.getElementById('image1').addEventListener('change', function () {
+        var imagePreview = document.getElementById('imagePreview1');
+        var fileInput = this;
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    });
 </script>
 <script src="/Admin/vendor/jquery/jquery.min.js"></script>
     <script src="/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

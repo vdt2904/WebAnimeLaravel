@@ -19,6 +19,7 @@
                                     <th rowspan="1" colspan="1">Mã Anime</th>
                                     <th rowspan="1" colspan="1">Tên Anime</th>
                                     <th rowspan="1" colspan="1">Ảnh</th>
+                                    <th rowspan="1" colspan="1">Ảnh Ngang</th>
                                     <th rowspan="1" colspan="1">Ngày phát sóng</th>
                                     <th rowspan="1" colspan="1">Tổng số tập</th>
                                     <th rowspan="1" colspan="1">Hãng phim</th>
@@ -35,6 +36,7 @@
                                     <td>{{$k->MaAnime}}</td>
                                     <td>{{$k->Anime}}</td>
                                     <td><img src="{{ $k->Anh }}" alt="Hình ảnh" width="50" height="50"></td>
+                                    <td><img src="{{ $k->AnhNgang }}" alt="Hình ảnh" width="50" height="50"></td>
                                     <td>{{$k->NgayPhatSong}}</td>
                                     <td>{{$k->TongSoTap}}</td>
                                     @php

@@ -13,6 +13,7 @@ class HomeController extends Controller
         $popular = $a->popular();
         $liveaction = $a->liveaction();
         $trending = $a->trending();
-        return View('home.index',compact('recently','popular','liveaction','trending'));
+        $caro = $a->caro();
+        return View('home.index',compact('recently','popular','liveaction','trending','caro'));
     }
 }

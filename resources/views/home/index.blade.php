@@ -1,4 +1,45 @@
 @extends('HomeLayout')
+@section('section')
+@php
+    use Illuminate\Support\Facades\DB;
+@endphp
+<section class="hero">
+    <div class="container">
+        <div class="hero__slider owl-carousel">
+            @if (!empty($caro[0]))
+                @foreach ($caro[0] as $item => $k)
+                <div class="hero__items set-bg" data-setbg="{{$k->AnhNgang}}" style="max-width: 1140px; height: 579px;">
+                    @if ($k->LP == 1)
+                    <div><img src="/home/img/vip-card.png" alt="" style="max-width: 5%;"></div>    
+                    @endif                   
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                @foreach ($caro[1] as $it => $j)
+                                    @if ($j->MaAnime == $k->MaAnime)
+                                    <div class="label">{{$j->TheLoai}}</div>                                        
+                                    @endif
+                                @endforeach
+                                
+                                <h2>{{$k->Anime}}</h2>
+                                @php
+                                    $tp = DB::table('tb_tapphim as tp')
+                                        ->join('tb_anime as a', 'tp.MaAnime', '=', 'a.MaAnime')
+                                        ->where('a.MaAnime', $k->MaAnime)
+                                        ->orderBy('tp.Tap')
+                                        ->first();
+                                @endphp
+                                <a href="{{ route('watch', ['maanime' => $k->MaAnime, 'matp' => $tp->MaTP]) }}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
+</section>
+@endsection
 @section('content')
 <div class="col-lg-8">
     <div class="trending__product">
@@ -10,7 +51,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <div class="btn__all">
-                    <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                    <a href="/home/trending" class="primary-btn">View All <span class="arrow_right"></span></a>
                 </div>
             </div>
         </div>
@@ -59,7 +100,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <div class="btn__all">
-                    <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                    <a href="/home/popular" class="primary-btn">View All <span class="arrow_right"></span></a>
                 </div>
             </div>
         </div>
@@ -108,7 +149,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <div class="btn__all">
-                    <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                    <a href="/home/recently" class="primary-btn">View All <span class="arrow_right"></span></a>
                 </div>
             </div>
         </div>
@@ -157,7 +198,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <div class="btn__all">
-                    <a href="#" class="primary-btn">View All <span class="arrow_right"></span></a>
+                    <a href="/home/liveaction" class="primary-btn">View All <span class="arrow_right"></span></a>
                 </div>
             </div>
         </div>

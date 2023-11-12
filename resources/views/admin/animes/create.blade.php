@@ -14,9 +14,16 @@
             @enderror
         </div>
         <div class="form-group">
-            <img id="imagePreview" src="" width="200" height="150" alt="Ảnh hiện tại">
+            <img id="imagePreview" src="" width="200" height="150" alt="Ảnh">
             <input type="file" class="form-control-file" id="image" name="image" accept="image/*" >
             @error('image')
+                <span style="color: red">{{$message}}</span>
+            @enderror
+        </div>  
+        <div class="form-group">
+            <img id="imagePreview1" src="" width="200" height="150" alt="Ảnh Ngang">
+            <input type="file" class="form-control-file" id="image1" name="image1" accept="image/*" >
+            @error('image1')
                 <span style="color: red">{{$message}}</span>
             @enderror
         </div>  
