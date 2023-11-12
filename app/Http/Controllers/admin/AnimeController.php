@@ -52,11 +52,17 @@ class AnimeController extends Controller
             'public_id' => $publicId,
             'folder' => $folder,
         ])->getSecurePath();
-        
+        $folder1 = 'WebAnime/anime/'.$request->maanime.'/img';
+        $publicId1 = 'N'.$request->maanime;
+        $response1 = cloudinary()->upload($request->file('image1')->getRealPath(), [
+            'public_id' => $publicId1,
+            'folder' => $folder1,
+        ])->getSecurePath();
         $datainsert = [
             'MaAnime' => $request->maanime,
             'Anime' => $request->anime,
             'Anh' => $response,
+            'AnhNgang' => $response1,
             'NgayPhatSong' => $request->publish_date,
             'ThongTin' => $request->ThongTin,
             'MaHP' => $request-> mahp,
@@ -102,9 +108,20 @@ class AnimeController extends Controller
             }else{
                 $response = $anigdetail[0]->Anh;
             }
+            if(!empty($request->file('image1'))){
+                $folder1 = 'WebAnime/anime/'.$MaAnime.'/img';
+                $publicId1 = 'N'.$MaAnime;
+                $response1 = cloudinary()->upload($request->file('image1')->getRealPath(), [
+                    'public_id' => $publicId1,
+                    'folder' => $folder1,
+                ])->getSecurePath();
+            }else{
+                $response1 = $anigdetail[0]->AnhNgang;
+            }
             $dataupdate = [
                 'Anime' => $request->anime,
                 'Anh' => $response,
+                'AnhNgang' => $response1,
                 'NgayPhatSong' => $request->publish_date,
                 'ThongTin' => $request->ThongTin,
                 'MaHP' => $request-> mahp,
@@ -135,6 +152,8 @@ class AnimeController extends Controller
         cloudinary::destroy($duongdan,["resource_type" => "video"]);
         $duongdan1 = 'WebAnime/anime/'.$id.'/img/'.$id;
         cloudinary::destroy($duongdan1);
+        $duongdan2 = 'WebAnime/anime/'.$id.'/img/N'.$id;
+        cloudinary::destroy($duongdan2);
         return redirect()->route('admin.animes')->with('msg','Xóa thành công');
     }
 }
