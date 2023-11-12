@@ -63,7 +63,7 @@ class Userss extends Model implements Authenticatable
     public function getRememberTokenName()
     {
         // Implement this method if you are using "remember me" functionality
-
+    }
     public function insertuser($data)
     {
 

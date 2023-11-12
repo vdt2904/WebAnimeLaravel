@@ -36,7 +36,7 @@
                 <div class="col-lg-12 text-center">
                     <div class="normal__breadcrumb__text">
                         <h2>Our Blog</h2>
-                        <p>Welcome to the official Anime blog.</p>
+                        <p>Welcome to the official Anime blog.</p>
                     </div>
                 </div>
             </div>
@@ -186,7 +186,7 @@
                             <div class="blog__item set-bg" data-setbg="{{ $data[11] ->Anh }}">
                                 <div class="blog__item__text">
                                     <p><span class="icon_calendar"></span> {{ $data[11] ->Anh }}</p>
-                                    <h4<a href="{{ route('blog.detail', ['id' => $data[11]->MaAnime]) }}">{{ $data[11] ->TenBlog }}</a></h4>
+                                    <h4><a href="{{ route('blog.detail', ['id' => $data[11]->MaAnime]) }}">{{ $data[11] ->TenBlog }}</a></h4>
                                 </div>
                             </div>
                         </div>

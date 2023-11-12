@@ -21,8 +21,9 @@ class loginAdminController extends Controller
     }
     public function login(Request $request)
     {
+        
         $rules = [
-            'email' => 'required|email',
+            'email' => 'required',
             'password' => 'required'
         ];
         $message = [

@@ -6,6 +6,16 @@
         <br>
         <a class="btn btn-primary" href="{{url('/admin/hangphim/add')}}">Thêm</a>
     </div>
+    @if(session('successMsg'))
+        <div class="alert alert-success">
+            {{ session('successMsg') }}
+        </div>
+    @endif
+    @if(session('msg'))
+        <div class="alert alert-danger">
+            {{ session('msg') }}
+        </div>
+    @endif
     <div class="card-body">
         <div class="table">
             <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -27,7 +37,11 @@
                                     <td>{{$k->HangPhim}}</td>
                                     <td>
                                         <a class="btn btn-primary" href="{{url('/admin/hangphim/edit/'.$k->MaHP)}}">Sửa</a>
-                                        <a class="fas fa-trash-alt text-danger" href="#"></a>
+                                        <form action="{{ url('admin/deletehp/'.$k->MaHP) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa không?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
+                                        </form>
                                     </td>                                                                       
                                 </tr>                       
                                 @endforeach

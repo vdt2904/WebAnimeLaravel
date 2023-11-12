@@ -25,6 +25,8 @@ Route::get('home/category/{id}', [categoryController::class, 'category'])->name(
 
 Route::get('home/watch/{maanime}/{matp}', [animewatchController::class, 'watch'])->name('watch');
 Route::get('api/getcomments/{matp}/{page}/{perpage}', [animewatchController::class, 'comments']);
+Route::post('api/comment/{ma}', [animewatchController::class, 'insertcmt']);
+Route::post('api/view/{ma}', [animewatchController::class, 'insertView']);
 
 Route::get('api/topday', [apilayoutController::class, 'topday']);
 Route::get('api/topweek', [apilayoutController::class, 'topweek']);

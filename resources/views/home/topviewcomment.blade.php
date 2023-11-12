@@ -55,7 +55,7 @@
                     if (response[i].LP == 1) {
                         table = table + '<div class="vip-img" style="position: absolute; top: 0; right: 0; width: 10%; transform: translate(-100%, 0);"><img src = "/Home/img/vip-card.png" alt = "VIP" ></div>'
                     }
-                    table = table + '<h5><a href="#' + response[i].MaAnime + '">' + response[i].Anime + '</a></h5>'
+                    table = table + '<h5><a href="/filmdetails/' + response[i].MaAnime + '">' + response[i].Anime + '</a></h5>'
                     table = table + '</div>'
                 }
                 document.getElementById('idtopview').innerHTML = table;
@@ -88,7 +88,7 @@
                     if (response[i].LP == 1) {
                         table = table + '<div class="vip-img" style="position: absolute; top: 0; right: 0; width: 10%; transform: translate(-100%, 0);"><img src = "/Home/img/vip-card.png" alt = "VIP" ></div>'
                     }
-                    table = table + '<h5><a href="#' + response[i].MaAnime + '">' + response[i].Anime + '</a></h5>'
+                    table = table + '<h5><a href="/filmdetails/' + response[i].MaAnime + '">' + response[i].Anime + '</a></h5>'
                     table = table + '</div>'
                 }
                 document.getElementById('idtopview').innerHTML = table;
@@ -121,7 +121,7 @@
                     if (response[i].LP == 1) {
                         table = table + '<div class="vip-img" style="position: absolute; top: 0; right: 0; width: 10%; transform: translate(-100%, 0);"><img src = "/Home/img/vip-card.png" alt = "VIP" ></div>'
                     }
-                    table = table + '<h5><a href="#' + response[i].MaAnime + '">' + response[i].Anime + '</a></h5>'
+                    table = table + '<h5><a href="/filmdetails/' + response[i].MaAnime + '">' + response[i].Anime + '</a></h5>'
                     table = table + '</div>'
                 }
                 document.getElementById('idtopview').innerHTML = table;
@@ -154,7 +154,7 @@
                     if (response[i].LP == 1) {
                         table = table + '<div class="vip-img" style="position: absolute; top: 0; right: 0; width: 10%; transform: translate(-100%, 0);"><img src = "/Home/img/vip-card.png" alt = "VIP" ></div>'
                     }
-                    table = table + '<h5><a href="#' + response[i].MaAnime + '">' + response[i].Anime + '</a></h5>'
+                    table = table + '<h5><a href="/filmdetails/' + response[i].MaAnime + '">' + response[i].Anime + '</a></h5>'
                     table = table + '</div>'
                 }
                 document.getElementById('idtopview').innerHTML = table;
@@ -194,7 +194,7 @@
                         }
                     });
                     table = table + '<ul>';
-                    table = table + '<h5><a href="#">'+ ani[i].Anime + '</a></h5>';
+                    table = table + '<h5><a href="/filmdetails/' + ani[i].MaAnime + '">'+ ani[i].Anime + '</a></h5>';
                     table = table + '<span><i class="fa fa-eye"></i> ' + ani[i].Views + ' Viewes</span>';
                     table = table + '</div>';
                     table = table + '</div>';

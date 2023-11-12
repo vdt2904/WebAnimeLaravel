@@ -17,8 +17,8 @@
                 <div class="header__nav">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="/">Trang chủ</a></li>
-                            <li><a href="#">Thể loại <span class="arrow_carrot-down"></span></a>
+                            <li class="active"><a href="/">Home</a></li>
+                            <li><a href="#">Categories <span class="arrow_carrot-down"></span></a>
                                 <ul class="dropdown">
                                     @php
                                         $a = DB::select('SELECT theloai,MaTL from tb_theloai');
@@ -30,7 +30,6 @@
                             </li>
                             <li><a href="{{ url('/blog') }}">Our Blog</a></li>
                             <li><a href="{{ route('contact') }}">Contacts</a></li>
-                            <li><a href="#" class="search-switch"><span class="icon_search"></span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -78,15 +77,18 @@
     }
     #search_list {
         display: none;
-    max-height: 300px; /* Limit the height of the result container */
+    max-height: 300px;
     width: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #212533;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: fixed; 
+    top: 60px; 
+    right: 10px; 
     z-index: 2;
-    overflow-y: auto; /* Add a scrollbar if the content overflows the container */
-    border: 1px solid #ccc; /* Add a border around the container */
-    border-radius: 5px; /* Round the corners of the container */
-    padding: 10px; /* Add some padding inside the container */
-    background-color: #212533; /* Set the background color */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
     }
     .movie-list {
         display: flex;

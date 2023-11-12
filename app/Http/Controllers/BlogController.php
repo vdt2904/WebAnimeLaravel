@@ -19,7 +19,7 @@ class BlogController extends Controller
         $data = DB::table('tb_blog')
             ->join('tb_ourblog', 'tb_blog.IDBlog', '=', 'tb_ourblog.IDBlog')
             ->select('*')
-            ->paginate(12);
+            ->paginate(3);
 
         //  dd($data);
         return view('BlogLayout', compact('data'));

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Userss;
+use App\Models\tdtm;
 use Illuminate\Http\Request;
 
 class UserRegisterController extends Controller
@@ -25,32 +26,6 @@ class UserRegisterController extends Controller
         $email = $request->Email;
         $name = $request->TenND;
         $numberphone = $request->SDT;
-        if (!preg_match($cgmailRegex, $email)) {
-
-            return redirect()->route('signup')->withErrors(['Invalid email']);
-        }
-        if (Userss::where('Email', '=', $email)->exists()) {
-            return redirect()->route('signup')->withErrors(['Email already exists']);
-        }
-        if (!preg_match($cnameRegex, $name)) {
-            return redirect()->route('signup')->withErrors(['Invalid name']);
-        }
-
-        if (!preg_match($cpasRegex, $pass)) {
-            return redirect()->route('signup')->withErrors(['Invalid password']);
-        }
-
-        if ($pass != $repass) {
-            return redirect()->route('signup')->withErrors(['Passwords do not match']);
-        }
-
-        if (!preg_match($numberphoneRegex, $numberphone)) {
-            return redirect()->route('signup')->withErrors(['invalid phone number']);
-        }
-
-        if (Userss::where('SDT', '=', $numberphone)->exists()) {
-            return redirect()->route('signup')->withErrors(['Phone number already exists']);
-        }
         if (Userss::where('Email', '=', $email)->exists()) {
             return redirect()->route('signup')->withErrors(['Email đã tồn tại']);
         }
@@ -74,10 +49,13 @@ class UserRegisterController extends Controller
             return redirect()->route('signup')->withErrors(['Số điện thoại đã tồn tại']);
         }
 
-        $lastMaND = Userss::max('MaND');
-        $newMaND = $lastMaND + 1;
+        $table = 'tb_nguoidung';
+        $column = 'MaND';
+        $mamd = 'ND0001';
+        $ma = new tdtm();
+        $ma = $ma->ma($table,$column,$mamd);
         $newuser->insertnd([
-            'MaND' => $newMaND + 1,
+            'MaND' => $ma,
             'TenND' => $request->TenND,
             'Email' => $request->Email,
             'Password' => bcrypt($request->Password),

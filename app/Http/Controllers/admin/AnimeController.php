@@ -24,8 +24,7 @@ class AnimeController extends Controller
        //dd($userslist1);
         return View('admin.animes.animelist',compact('userslist1'));
     }
-    public function create()
-    {
+    public function create(){
         $table = 'tb_anime';
         $column = 'MaAnime';
         $mamd = 'MA0001';
@@ -39,13 +38,32 @@ class AnimeController extends Controller
         $request->validate([
             'anime' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'publish_date' => 'required',
+            'tongsotap' => 'nullable|integer|min:1',
+            'malp' => 'required',
+            'loai' => 'required'
         ],[
             'anime.required' => 'Tên anime không được để trống',
             'image.required' => 'Ảnh không được để trống',
             'image.image' => 'File phải là hình ảnh',
             'image.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif',
             'image.max' => 'Dung lượng hình ảnh không được vượt quá 2MB',
+            'image1.required' => 'Ảnh không được để trống',
+            'image1.image' => 'File phải là hình ảnh',
+            'image1.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif',
+            'image1.max' => 'Dung lượng hình ảnh không được vượt quá 2MB',
+            'publish_date.required' => 'Ngày phát sóng không được để trống',
+            'tongsotap.integer' => 'Tổng số tập phải nhập số',
+            'tongsotap.min' => 'Tổng số tập phải lớn hơn 0',
+            'malp.required' => 'Loại phim không được để trống',
+            'loai.required' => 'Loại không được để trống'
         ]);
+        $animes = new Animess();
+        $check = $animes->getdetail($request->anime);
+        if(!empty($check)){
+            return redirect()->back()->withErrors(['error' => 'Anime đã tồn tại']);
+        }
         $folder = 'WebAnime/anime/'.$request->maanime.'/img';
         $publicId = $request->maanime;
         $response = cloudinary()->upload($request->file('image')->getRealPath(), [
@@ -71,7 +89,7 @@ class AnimeController extends Controller
             'LP' => $request-> loai,
             'status' => $request-> status,
         ];
-        $animes = new Animess();
+        
         $addd = $animes->insertdata($datainsert);
         return redirect()->route('admin.animes');
     }
@@ -94,9 +112,30 @@ class AnimeController extends Controller
         return view('admin.animes.edit',compact('anidetail','mahp','malp'));
     }
     public function edita(Request $request){
+        $request->validate([
+            'anime' => 'required',
+            'publish_date' => 'required',
+            'tongsotap' => 'nullable|integer|min:1',
+            'malp' => 'required',
+            'loai' => 'required',
+            'status' => 'required'
+        ],[
+            'anime.required' => 'Tên anime không được để trống',
+            'publish_date.required' => 'Ngày phát sóng không được để trống',
+            'tongsotap.integer' => 'Tổng số tập phải nhập số',
+            'tongsotap.min' => 'Tổng số tập phải lớn hơn 0',
+            'malp.required' => 'Loại phim không được để trống',
+            'loai.required' => 'Loại không được để trống',
+            'status.required' => 'Trạng thái không được để trống'
+        ]);
         $MaAnime = $request->session()->get('MaAnime');
         $ani = new Animess();
         $anigdetail = $ani->getdetail($MaAnime);
+        $check = $ani->getdetail($request->anime);
+        if($check[0]->MaAnime != $anigdetail[0]->MaAnime){
+            return redirect()->back()->withErrors(['error' => $request->anime.' đã tồn tại'])->withInput();
+        }
+        
         if(!empty($anigdetail[0])){
             if(!empty($request->file('image'))){
                 $folder = 'WebAnime/anime/'.$MaAnime.'/img';
@@ -154,6 +193,6 @@ class AnimeController extends Controller
         cloudinary::destroy($duongdan1);
         $duongdan2 = 'WebAnime/anime/'.$id.'/img/N'.$id;
         cloudinary::destroy($duongdan2);
-        return redirect()->route('admin.animes')->with('msg','Xóa thành công');
+        return redirect()->route('admin.animes')->with('successMsg','Xóa thành công');
     }
 }

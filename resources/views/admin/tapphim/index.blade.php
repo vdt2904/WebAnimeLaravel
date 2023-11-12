@@ -8,6 +8,11 @@
         <br/>
         <a class="btn btn-primary" href="{{url('/admin/tapphim/add')}}">Thêm</a>
     </div>
+    @if(session('msg'))
+        <div class="alert alert-success">
+            {{ session('msg') }}
+        </div>
+    @endif
     <div class="card-body">
         <div class="table-responsive">
             <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -44,6 +49,11 @@
                                     <td style="text-align: center;">{{$k->NenVideo}}</td>
                                     <td>
                                         <a class="btn btn-primary" href="{{url('/admin/tapphim/edit/'.$k->MaTP)}}">Sửa</a>
+                                        <form action="{{ url('admin/deletetp/'.$k->MaTP) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa không?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
+                                        </form>
                                     </td>                                    
                                     
                                 </tr>                       

@@ -15,14 +15,13 @@ class FilmDetailsController extends Controller
 {
     public function index($id)
     {
-
         $filmdetails = DB::table('tb_anime')
             ->join('tb_tlanime', 'tb_anime.MaAnime', '=', 'tb_tlanime.MaAnime')
             ->join('tb_theloai', 'tb_tlanime.MaTL', '=', 'tb_theloai.MaTL')
             ->join('tb_hangphim', 'tb_anime.MaHP', '=', 'tb_hangphim.MaHP')
 
             ->where('tb_anime.MaAnime', $id)
-            ->get();
+            ->get();      
         $filmdetailhp = DB::table('tb_anime')->join('tb_hangphim', 'tb_anime.MaHP', '=', 'tb_hangphim.MaHP')->where('tb_anime.MaAnime', $id)
             ->get();
         // $reviewfilms = DB::table('tb_review')
@@ -30,10 +29,15 @@ class FilmDetailsController extends Controller
         //     ->join('tb_nguoidung', 'tb_anime.MaND', '=', 'tb_review.MaND')
         //     ->select('tenND')
         //     ->where('tb_anime.MaAnime', $id)->get();
-        $rate = review::join('tb_anime', 'tb_anime.MaAnime', '=', 'tb_review.MaAnime')
+        $rate = review::join('tb_anime', 'tb_anime.MaAnime', '=', 'tb_review.MaAnime')->where('tb_anime.MaAnime',$id)
             ->sum('tb_review.Rate');
         $countrate = (review::count());
-        $ratetb = $rate / (review::count());
+        if($countrate == 0){
+            $ratetb = 0;
+        }else{
+            $ratetb = $rate / (review::count());
+        }
+        
         $review = DB::table('tb_review')
             ->join('tb_anime', 'tb_review.MaAnime', '=', 'tb_anime.MaAnime')
             ->join('tb_nguoidung', 'tb_review.MaND', '=', 'tb_nguoidung.MaND')
@@ -42,8 +46,35 @@ class FilmDetailsController extends Controller
             ->get();
 
         // dd($filmdetails);
-
-        return view('FilmDetails', compact('filmdetails', 'review', 'ratetb', 'countrate'));
+        $video = DB::table('tb_blog')->where('MaAnime',$id)->first();
+        $might = DB::select('SELECT
+                        a.MaAnime,
+                        a.Anime,
+                        a.AnhNgang,
+                        a.LP,
+                        a.TongSoTap,
+                        Max(tp.Tap) AS MaxTap,
+                        Sum(tp.Views) AS TongViews,
+                        Sum(tp.Comments) AS TongComments
+                    FROM
+                        tb_anime a
+                        JOIN tb_tapphim tp ON tp.MaAnime = a.MaAnime
+                        Join tb_tlanime tla on tla.MaAnime = a.MaAnime
+                    Where
+                        tla.MaTL in (SELECT MaTL from tb_tlanime where MaAnime = ? )
+                        and a.MaAnime != ?
+                    GROUP BY
+                        a.MaAnime,
+                        a.Anime,
+                        a.AnhNgang,
+                        a.LP,
+                        a.TongSoTap
+                        ORDER BY
+                        RAND()
+                    LIMIT 4
+                ',[$id,$id]);
+                
+        return view('FilmDetails', compact('filmdetails', 'review', 'ratetb', 'countrate','video','might'));
     }
     public function  SendReview(Request $request)
     {

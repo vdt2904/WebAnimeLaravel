@@ -18,7 +18,7 @@ class Animess extends Model
     }
     public function getdetail($id)
     {
-        return DB::table($this->table)->where('MaAnime', $id)->get();
+        return DB::table($this->table)->where('MaAnime', $id)->orwhere('Anime',$id)->get();
     }
     public function insertdata($data)
     {

@@ -60,7 +60,7 @@
     </div>
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{url('/admin/users')}}">
             <span>Quản lý tài khoản</span></a>
     </li>
     <!-- Nav Item - Tables -->
@@ -69,7 +69,7 @@
             <span>Quản lý gói cước</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{url('/admin/hdtt')}}">
             <span>Quản lý hóa đơn thanh toán</span></a>
     </li>
     <!-- Divider -->

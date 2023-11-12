@@ -8,6 +8,16 @@
         <br>
         <a class="btn btn-primary" href="{{url('/admin/animes/add')}}">Thêm</a>
     </div>
+    @if(session('successMsg'))
+        <div class="alert alert-success">
+            {{ session('successMsg') }}
+        </div>
+    @endif
+    @if(session('msg'))
+        <div class="alert alert-danger">
+            {{ session('msg') }}
+        </div>
+    @endif
     <div class="card-body">
         <div class="table-responsive">
             <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -67,7 +77,7 @@
                                     @endif
                                     <td>
                                         <a class="btn btn-primary" href="{{url('/admin/animes/edit/'.$k->MaAnime)}}">Sửa</a>
-                                        <form action="{{ url('admin/deleteanime/'.$k->MaAnime) }}" method="POST">
+                                        <form action="{{ url('admin/deleteanime/'.$k->MaAnime) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa không?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Xóa</button>

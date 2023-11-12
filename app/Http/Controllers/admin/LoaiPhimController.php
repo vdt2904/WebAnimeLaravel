@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\loaiphim;
 use App\Models\tdtm;
+use Illuminate\Support\Facades\DB;
 class LoaiPhimController extends Controller
 {
     public function index(){
@@ -65,8 +66,12 @@ class LoaiPhimController extends Controller
         return redirect()->route('admin.loaiphim');
     }
     public function delete($id){
+        $check = DB::select('SELECT * from tb_anime Where MaLP = ? ',[$id]);
+        if(!empty($check)){
+            return redirect()->route('admin.loaiphim')->with('msg','Xóa không thành công');
+        }
         $del = new loaiphim();
         $del->deletedata($id);
-        return redirect()->route('admin.loaiphim')->with('msg','Xóa thành công');
+        return redirect()->route('admin.loaiphim')->with('successMsg','Xóa thành công');
     }
 }

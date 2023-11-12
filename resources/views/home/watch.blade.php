@@ -7,6 +7,8 @@
     <meta name="keywords" content="Anime, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Anime | Group 5</title>
 
     <!-- Google Font -->
@@ -89,10 +91,16 @@
                         <div class="section-title">
                             <h5>Your Comment</h5>
                         </div>
-                        <form action="#">
-                            <textarea placeholder="Your Comment"></textarea>
-                            <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
-                        </form>
+                        <div class="container mt-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <textarea class="form-control" placeholder="Your Comment" id="idcmt"></textarea>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" onclick="cmt()"><i class="fa fa-location-arrow"></i> Review</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -204,6 +212,58 @@
             page = pageNumber;
             fetchData();
         }
+        function cmt() {
+            var ul = 'http://127.0.0.1:8000/api/comment/' + $('#matp').val();
+            var cmtData = {
+                cmt: $('#idcmt').val(),
+                _token: '{{ csrf_token() }}'
+            };
+            $.ajax({
+                url: ul,
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(cmtData),
+                dataType: 'text',
+                success: function (response) {
+                    fetchData();
+                    $('#idcmt').val('');
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert("Cập nhật không thành công: " + xhr.responseText);
+                }
+            });
+        }
+        var video = document.getElementById("player");
+        var halfwayReached = false;
+        video.addEventListener('timeupdate', function() {
+            var currentTime = video.currentTime;
+            var duration = video.duration;
+
+            // Kiểm tra khi nào người xem đến giữa phim
+            if (!halfwayReached && currentTime > duration / 2) {
+                halfwayReached = true;
+                // Gọi hàm insertView() ở đây
+                insertView();
+            }
+        });
+        function insertView() {
+        var maTP = $('#matp').val(); // Cần cung cấp mã phim từ dữ liệu phía client
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: '/api/view/' + maTP,
+            method: 'POST',
+            headers: {
+            'X-CSRF-TOKEN': csrfToken // Thêm token CSRF vào header
+            },
+            dataType: 'json',
+            success: function (response) {
+                console.log('Insert thành công!');
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.error('Lỗi khi insert:', xhr.responseText);
+            }
+        });
+    }
     </script>
     
     <!--kết thúc Xử lý dữ liệu -->

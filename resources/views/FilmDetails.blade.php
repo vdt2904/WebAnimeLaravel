@@ -30,7 +30,9 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
-
+@php
+    use Illuminate\Support\Facades\DB;
+@endphp
     <!-- Header Section Begin -->
     @include('home.header')
     <!-- Header End -->
@@ -101,23 +103,30 @@
                             </div>
                         </div>
                         <div class="anime__details__btn">
-                            
-                            <a href="#" class="watch-btn"><span>Watch Now</span> <i
+                            @php
+                                $a = DB::select('SELECT MaTP from tb_tapphim where MaAnime = ? order by MaTP asc',[$filmdetails[0]->MaAnime]);
+
+                            @endphp
+                            <a href="{{ route('watch', ['maanime' => $filmdetails[0]->MaAnime, 'matp' => $a[0]->MaTP]) }}" class="watch-btn"><span>Watch Now</span> <i
                                     class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-      
-    
+
         <div class="row">
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-8 col-md-8">
+                <div class="section-title">
+                    <h5>Trailer</h5>
+                </div>
+                <video width="100%" controls>
+                    <source src="{{$video->Trailer}}" type="video/mp4">                  
+                </video>
+                <br>
                 <div class="anime__details__review">
                     <div class="section-title">
                         <h5>Reviews</h5>
                     </div>
-                   
-                
                     @foreach ($review as $rv)
                     <div class="anime__review__item">
                         <div class="anime__review__item__pic">
@@ -148,26 +157,18 @@
                     <div class="section-title">
                         <h5>you might like...</h5>
                     </div>
-                    <div class="product__sidebar__view__item set-bg" data-setbg="/Home/img/sidebar/tv-1.jpg">
-                        <div class="ep">18 / ?</div>
-                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                        <h5><a href="#">Boruto: Naruto next generations</a></h5>
+                    @foreach ($might as $item=>$k)
+                    <div class="product__sidebar__view__item set-bg" data-setbg="{{$k->AnhNgang}}">
+                        <div class="ep">{{$k->MaxTap}} / @if ($k->TongSoTap == null)
+                            ??
+                        @else
+                            {{$k->TongSoTap}}
+                        @endif
+                        </div>
+                        <div class="view"><i class="fa fa-eye"></i> {{$k->TongViews}}</div>
+                        <h5><a href="/filmdetails/{{$k->MaAnime}}">{{$k->Anime}}</a></h5>
                     </div>
-                    <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-2.jpg">
-                        <div class="ep">18 / ?</div>
-                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                        <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                    </div>
-                    <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-3.jpg">
-                        <div class="ep">18 / ?</div>
-                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                        <h5><a href="#">Sword art online alicization war of underworld</a></h5>
-                    </div>
-                    <div class="product__sidebar__view__item set-bg" data-setbg="img/sidebar/tv-4.jpg">
-                        <div class="ep">18 / ?</div>
-                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                        <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

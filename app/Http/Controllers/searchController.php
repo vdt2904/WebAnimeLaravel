@@ -29,7 +29,7 @@ class searchController extends Controller
             foreach ($data as $row) {
                 $output .= '<li class="movie-item">';
                 $output .= '<img style="width:40%;" src="' . $row->Anh . '" alt="' . $row->Anime . '">';
-                $output .= '<h3 style="font-size:15px;line-height: 60px;color:#fff;margin-left:5px;" >' . $row->Anime . '</h3>';
+                $output .= '<h3 style="font-size:15px;line-height: 60px;color:#fff;margin-left:5px;" ><a href="/filmdetails/'.$row->MaAnime.'">' . $row->Anime . '</a></h3>';
                 $output .= '</li>';
             }
 

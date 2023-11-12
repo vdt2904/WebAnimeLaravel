@@ -78,6 +78,6 @@ class GoiController extends Controller
             return redirect()->route('admin.goi')->with('msg','Xóa không thành công');
         }
         $g->deletedata($id);
-        return redirect()->route('admin.goi')->with('msg','Xóa thành công');
+        return redirect()->route('admin.goi')->with('successMsg','Xóa thành công');
     }
 }

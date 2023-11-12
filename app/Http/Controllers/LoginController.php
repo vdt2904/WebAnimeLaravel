@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\InvalidStateException;
 use App\Models\resetpass;
+use App\Models\tdtm;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -30,7 +31,7 @@ class LoginController extends Controller
         $user = Userss::where('Email', $request->Email)->first();
         if ($user && Hash::check($request->Password, $user->Password)) {
             $request->session()->put('InforUser', $user);
-            return redirect()->route('HomeLayout')->with('success', 'Login successful! Welcome ' . $user->TenND);
+            return redirect()->route('home')->with('success', 'Login successful! Welcome ' . $user->TenND);
         } else {
             return redirect()->route('LoginHome')->withErrors(['Email or passworf incorrect!']);
         }
@@ -38,14 +39,14 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $request->session()->forget('InforUser');
-        return redirect()->route('HomeLayout')->with('success', 'Logout successful!');
+        return redirect()->route('home')->with('success', 'Logout successful!');
     }
 
     public function authenticate(Request $request)
     {
         $user = Userss::where('Email', $request->Email)->first();
         if ($user && Hash::check($request->Password, $user->Password)) {
-            return redirect()->route('HomeLayout');
+            return redirect()->route('home');
         } else {
             return redirect()->route('LoginHome')->withErrors(['Email hoặc mật khẩu không đúng']);
         }
@@ -73,7 +74,7 @@ class LoginController extends Controller
 
             session()->put('InforUser', $user);
         }
-        return redirect()->route('HomeLayout')->with('success', 'Login successful! Welcome ' . $user->TenND);
+        return redirect()->route('home')->with('success', 'Login successful! Welcome ' . $user->TenND);
     }
     public function handleTwitterCallback()
     {
@@ -96,7 +97,7 @@ class LoginController extends Controller
 
             session()->put('InforUser', $user);
         }
-        return redirect()->route('HomeLayout')->with('success', 'Login successful! Welcome ' . $user->TenND);
+        return redirect()->route('home')->with('success', 'Login successful! Welcome ' . $user->TenND);
     }
     public function handleGoogleCallback()
     {
@@ -108,20 +109,23 @@ class LoginController extends Controller
         if ($existingUser) {
             session()->put('InforUser', $existingUser);
         } else {
-            $lastMaND = Userss::max('MaND');
-            $newMaND = $lastMaND + 1;
+            $table = 'tb_nguoidung';
+            $column = 'MaND';
+            $mamd = 'ND0001';
+            $ma = new tdtm();
+            $ma = $ma->ma($table,$column,$mamd);
             $newUser->insertnd([
-                'MaND'  =>  $newMaND,
+                'MaND'  =>  $ma,
                 'TenND' => $user->name,
                 'Email' => $user->email,
                 'Password' => bcrypt(12345678),
                 'SDT' => 1,
-                'LoaiND' => 1,
+                'LoaiND' => 0,
             ]);
 
             session()->put('InforUser', $user);
         }
-        return redirect()->route('HomeLayout')->with('success', 'Login successful! Welcome ' . $user->name);
+        return redirect()->route('home')->with('success', 'Login successful! Welcome ' . $user->name);
     }
 
     public function ForgotPassword()

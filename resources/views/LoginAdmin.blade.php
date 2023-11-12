@@ -48,7 +48,7 @@
                                     <form class="user" action="{{route('login')}}" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control form-control-user" @if (isset($_COOKIE["email"]))
+                                            <input type="text" name="email" class="form-control form-control-user" @if (isset($_COOKIE["email"]))
                                                 value="{{ $_COOKIE["email"]}}"
                                             @endif
                                                 id="exampleInputEmail" aria-describedby="emailHelp"

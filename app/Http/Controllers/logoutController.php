@@ -12,7 +12,7 @@ class logoutController extends Controller
     }
     public function logout(Request $request)
     {
-        $request->session()->forget('InforUser.Email');
+        $request->session()->forget('InforUser');
         return View('LoginHome');
     }
 }

@@ -13,7 +13,7 @@ use App\Http\Controllers\admin\logoutAdminController;
 use App\Http\Controllers\admin\GoiController;
 use App\Http\Controllers\admin\LoaiPhimController;
 use App\Http\Controllers\admin\TapPhimController;
-
+use App\Http\Controllers\admin\hdttController;
 use App\Http\Controllers\searchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\logoutController;
@@ -57,18 +57,20 @@ Route::get('/goiUser', [goiUserController::class, 'index'])->name('goiLayout');
 Route::get('/History', [HistoryController::class, 'index'])->name('history');
 Route::post('/History/purchase', [HistoryController::class, 'purchase'])->name('purchase');
 //group admin
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('checkAdminLogin')->group(function () {
     // Đặt tất cả các route bạn muốn gắn vào nhóm "admin" ở đây
-    // ->middleware('checkAdminLogin')
+    // 
     // Dashboard
     Route::get('/dashboard', [dashboardController::class, 'Index'])->name('dashboard');
     Route::get('/users', [dashboardController::class, 'userlist']);
+    Route::get('/hdtt', [hdttController::class, 'index']);
     // Blogs
     Route::get('/blogs', [BlogsController::class, 'blogslist'])->name('admin.blogs');
     Route::get('/blogs/add', [BlogsController::class, 'create']);
     Route::post('uploadblogs', [BlogsController::class, 'uploadblogs'])->name('Blogs.uploadblogs');
     Route::get('/blogs/edit/{id}', [BlogsController::class, 'edit']);
     Route::put('updateblogs', [BlogsController::class, 'editblog'])->name('Blogs.updateblogs');
+    Route::delete('deleteblog/{id}',[BlogsController::class, 'delete']);
     // Blog Anime
     Route::get('/bloganime', [BlogAniController::class, 'BAlist'])->name('admin.bloganime');
     Route::get('/bloganime/add', [BlogAniController::class, 'create']);
@@ -89,36 +91,41 @@ Route::prefix('admin')->group(function () {
     Route::post('addtheloai', [TheLoaiController::class, 'adddata'])->name('addtheloai');
     Route::get('/theloai/edit/{id}', [TheLoaiController::class, 'edit']);
     Route::put('updatetheloai', [TheLoaiController::class, 'edittl'])->name('theloai.updatetheloai');
+    Route::delete('deletetl/{id}',[TheLoaiController::class, 'delete']);
     //thể loại cho anime
     Route::get('/tlanime', [TLAnimeController::class, 'index'])->name('admin.tlanime');
     Route::get('/tlanime/add', [TLAnimeController::class, 'create']);
     Route::post('addtla', [TLAnimeController::class, 'adddata'])->name('addtla');
     Route::get('/tlanime/edit/{id}', [TLAnimeController::class, 'edit']);
     Route::put('updatetla', [TLAnimeController::class, 'edittla'])->name('tlanime.updatetla');
+    Route::delete('deletetla/{id}',[TLAnimeController::class, 'delete']);
     // Hãng phim
     Route::get('/hangphim', [HangPhimController::class, 'index'])->name('admin.hangphim');
     Route::get('/hangphim/add', [HangPhimController::class, 'create']);
     Route::post('addhangphim', [HangPhimController::class, 'adddata'])->name('addhangphim');
     Route::get('/hangphim/edit/{id}', [HangPhimController::class, 'edit']);
     Route::put('updatehangphim', [HangPhimController::class, 'edithp'])->name('hangphim.updatehangphim');
+    Route::delete('deletehp/{id}',[HangPhimController::class, 'delete']);
     // Goi
     Route::get('/goi', [GoiController::class, 'index'])->name('admin.goi');
     Route::get('/goi/add', [GoiController::class, 'create']);
     Route::post('addgoi', [GoiController::class, 'adddata'])->name('addgoi');
     Route::get('/goi/edit/{id}', [GoiController::class, 'edit']);
     Route::put('updategoi', [GoiController::class, 'editg'])->name('goi.updategoi');
+    Route::delete('deleteg/{id}',[GoiController::class, 'delete']);
     // LoaiPhim
     Route::get('/loaiphim', [LoaiPhimController::class, 'index'])->name('admin.loaiphim');
     Route::get('/loaiphim/add', [LoaiPhimController::class, 'create']);
     Route::post('addloaiphim', [LoaiPhimController::class, 'adddata'])->name('addloaiphim');
     Route::get('/loaiphim/edit/{id}', [LoaiPhimController::class, 'edit']);
     Route::put('updateloaiphim', [LoaiPhimController::class, 'editlp'])->name('loaiphim.updateloaiphim');
-
+    Route::delete('deletelp/{id}',[LoaiPhimController::class, 'delete']);
     // TapPhim
     Route::get('/tapphim', [TapPhimController::class, 'index'])->name('admin.tapphim');
     Route::get('/tapphim/add', [TapPhimController::class, 'create']);
     Route::post('addtapphim', [TapPhimController::class, 'adddata'])->name('addtapphim');
     Route::get('/tapphim/edit/{id}', [TapPhimController::class, 'edit']);
     Route::put('updatetapphim', [TapPhimController::class, 'edittp'])->name('tapphim.updatetapphim');
+    Route::delete('deletetp/{id}',[TapPhimController::class, 'delete']);
 });
 

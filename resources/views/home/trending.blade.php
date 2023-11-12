@@ -38,7 +38,7 @@
                                         @endif
                                     @endforeach                                   
                                 </ul>
-                                <h5><a href="#">{{$k->Anime}}</a></h5>
+                                <h5><a href="{{route('filmdetails',['id' => $k->MaAnime])}}">{{$k->Anime}}</a></h5>
                             </div>
                         </div>
                     </div>

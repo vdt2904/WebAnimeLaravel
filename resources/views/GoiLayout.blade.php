@@ -131,7 +131,7 @@
             color: #fff;
         }
 
-        h4 {
+        h4,p {
             color: #fff;
         }
         .row {

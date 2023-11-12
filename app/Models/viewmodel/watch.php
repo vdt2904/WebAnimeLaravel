@@ -53,5 +53,10 @@ class watch extends Model
             return $comments;
         }
     }
-
+    public function cmt($data){
+       return DB::table('tb_comments')->insert($data);
+    }
+    public function insertview($data){
+        return DB::table('tb_view')->insert($data);
+    }
 }

@@ -78,6 +78,6 @@ class TheLoaiController extends Controller
             return redirect()->route('admin.theloai')->with('msg','Xóa không thành công');
         }
         $tl->deletedata($id);
-        return redirect()->route('admin.theloai')->with('msg','Xóa thành công');
+        return redirect()->route('admin.theloai')->with('successMsg','Xóa thành công');
     }
 }

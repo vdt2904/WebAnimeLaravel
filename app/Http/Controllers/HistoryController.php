@@ -13,7 +13,12 @@ class HistoryController extends Controller
 {
     public function index()
     {
-        $sql = DB::select('SELECT g.MaGoi,tt.NgayMua,g.Gia,g.ThoiGianSD,g.GhiChu FROM tb_nguoidung nd JOIN tb_thanhtoan tt on nd.MaND = tt.MaND JOIN tb_goi g on g.MaGoi = tt.MaGoi WHERE nd.MaND = ' . session('InforUser.MaND'));
+        $maND = session('InforUser.MaND');
+        $sql = DB::select('SELECT g.MaGoi, tt.NgayMua, g.Gia, g.ThoiGianSD, g.GhiChu 
+                        FROM tb_nguoidung nd 
+                        JOIN tb_thanhtoan tt ON nd.MaND = tt.MaND 
+                        JOIN tb_goi g ON g.MaGoi = tt.MaGoi 
+                        WHERE nd.MaND = ?', [$maND]);
         return View('HistoryLayout', compact('sql'));
     }
     public function purchase(Request $request)
@@ -29,7 +34,7 @@ class HistoryController extends Controller
             'NgayHetHan' => $tghh
         ];
         DB::table('tb_thanhtoan')->insert($data);
-        $b = DB::select('UPDATE tb_nguoidung set LoaiND = 1 where MaND = '.sesssion('InforUser.MaND'));
+        $b = DB::update('UPDATE tb_nguoidung SET LoaiND = 1 WHERE MaND = ?', [session('InforUser.MaND')]);
         return redirect()->route('history');
     }
 }

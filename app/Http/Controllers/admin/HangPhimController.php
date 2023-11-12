@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\hangphim;
 use App\Models\tdtm;
+use Illuminate\Support\Facades\DB;
 class HangPhimController extends Controller
 {
     public function index(){
@@ -65,8 +66,12 @@ class HangPhimController extends Controller
         return redirect()->route('admin.hangphim');
     }
     public function delete($id){
+        $check = DB::select('SELECT * from tb_anime Where MaHP = ? ',[$id]);
+        if(!empty($check)){
+            return redirect()->route('admin.hangphim')->with('msg','Xóa không thành công');
+        }
         $del = new hangphim();
         $del->deletedata($id);
-        return redirect()->route('admin.hangphim')->with('msg','Xóa thành công');
+        return redirect()->route('admin.hangphim')->with('successMsg','Xóa thành công');
     }
 }

@@ -30,6 +30,22 @@ class BlogAniController extends Controller
     }
     public function uploadtrailer(Request $request)
     {
+        $request->validate([
+            'maanime' => 'required',
+            'video' => 'required|mimes:mp4,mp3,mov,mov|max:102400',
+            'idblog' => 'required'
+        ],[
+            'maanime.required' => 'Anime không được để trống',
+            'idblog.required' => 'IDBlog không được để trống',
+            'video.required' => 'Video không được để trống',
+            'video.image' => 'File phải là video',
+            'video.mimes' => 'Video phải có định dạng: mp4, mp3, mov, mov',
+            'video.max' => 'Dung lượng video không được vượt quá 100MB',
+        ]);
+        $check = DB::select('SELECT * from tb_blog where MaAnime = ? and IDBlog = ?',[$request->maanime,$request->idblog]);
+        if(!empty($check)){
+            return redirect()->back()->withErrors(['error' => 'Đã tồn tại']);
+        }
         $folder = 'WebAnime/anime/' . $request->maanime . '/trailer';
         $publicId = $request->maanime;
         $response = cloudinary()->uploadVideo($request->file('video')->getRealPath(), [

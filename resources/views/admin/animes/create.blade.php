@@ -3,6 +3,11 @@
 @section('main')
 <div class="container">
     <h1>Thêm Anime</h1>
+    @if ($errors->has('error'))
+        <div class="alert alert-danger">
+            {{ $errors->first('error') }}
+        </div>
+    @endif
     <form method="POST" action="{{ route('animes.uploadanime') }}" enctype="multipart/form-data">
         @csrf 
         <input type="text" class="form-control col-md-6" id="maanime" name="maanime" value="{{$ma}}" style="visibility: hidden;">
@@ -30,14 +35,14 @@
         <div class="form-group">
             <label for="publish_date">Ngày Phát sóng</label>
             <input type="datetime-local" class="form-control col-md-6" id="publish_date" name="publish_date" >
-            @error('anime')
+            @error('publish_date')
                 <span style="color: red">{{$message}}</span>
             @enderror
         </div>
         <div class="form-group">
             <label for="name">Tổng số tập</label>
             <input type="number" class="form-control col-md-6" id="tongsotap" name="tongsotap">
-            @error('anime')
+            @error('tongsotap')
                 <span style="color: red">{{$message}}</span>
             @enderror
         </div>  
@@ -61,7 +66,7 @@
                     <option value="{{$k->MaLP}}">{{$k->LoaiPhim}}</option>
                 @endforeach
             </select>
-            @error('anime')
+            @error('malp')
                 <span style="color: red">{{$message}}</span>
             @enderror
         </div> 
@@ -72,7 +77,7 @@
                 <option value="0">Thường</option>
                 <option value="1">Vip</option>
             </select>
-            @error('anime')
+            @error('loai')
                 <span style="color: red">{{$message}}</span>
             @enderror
         </div>  
