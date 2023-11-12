@@ -19,6 +19,23 @@ class LoginController extends Controller
     {
         return view('LoginHome');
     }
+
+    public function login(Request $request)
+    {
+        $user = Userss::where('Email', $request->Email)->first();
+        if ($user && Hash::check($request->Password, $user->Password)) {
+            $request->session()->put('InforUser', $user);
+            return redirect()->route('HomeLayout')->with('success', 'Login successful! Welcome ' . $user->TenND);
+        } else {
+            return redirect()->route('LoginHome')->withErrors(['Email or passworf incorrect!']);
+        }
+    }
+    public function logout(Request $request)
+    {
+        $request->session()->forget('InforUser');
+        return redirect()->route('HomeLayout')->with('success', 'Logout successful!');;
+    }
+
     public function authenticate(Request $request)
     {
         $user = Userss::where('Email', $request->Email)->first();
