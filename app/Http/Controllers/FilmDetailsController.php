@@ -54,12 +54,13 @@ class FilmDetailsController extends Controller
         $newreview->insertreview(
             [
                 'MaAnime' => $request->segment(2),
-                'MaND'    => $request->sessio()->get('InforUser.MaND'),
+                'MaND'    => session('InforUser.MaND'),
                 'Review'  => $request->input('review'),
-                'Rate'    => null,
+                'Rate'    => 4,
                 'NgayReview' =>  $time
             ]
         );
+        return redirect()->back();
     }
 
     public function rateAnime(Request $request)

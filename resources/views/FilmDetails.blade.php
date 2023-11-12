@@ -136,7 +136,7 @@
                     </div>
                     <form action="{{ route('SendReview',['id'=> $filmdetails[0] ->MaAnime])}}" method="post">
                         @csrf
-                        <textarea placeholder="Your Comment"></textarea>
+                        <textarea name ="review" placeholder="Your Comment"></textarea>
                         <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
                     </form>
                 </div>
