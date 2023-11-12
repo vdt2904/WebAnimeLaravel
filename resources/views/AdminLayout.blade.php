@@ -11,7 +11,7 @@
     <meta name="author" content="">
 
     <title>Admin Anime</title>
-
+    <link rel="icon" href="Home/img/icon.jpg" type="image/png">
     <!-- Custom fonts for this template-->
     <link href="/Admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
