@@ -15,7 +15,7 @@ use App\Http\Controllers\clients\animewatchController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('home/trending', [categoryController::class, 'trending']);
 Route::get('home/popular', [categoryController::class, 'popular']);

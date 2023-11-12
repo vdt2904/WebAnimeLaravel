@@ -13,7 +13,16 @@ use App\Http\Controllers\admin\logoutAdminController;
 use App\Http\Controllers\admin\GoiController;
 use App\Http\Controllers\admin\LoaiPhimController;
 use App\Http\Controllers\admin\TapPhimController;
+
+use App\Http\Controllers\searchController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\logoutController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\goiUserController;
+use App\Http\Controllers\HistoryController;
+
 use App\Http\Controllers\admin\TLAnimeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +43,19 @@ Route::post('/admin/loginadmin/login', [loginAdminController::class, 'login'])->
 //logout
 Route::get('/admin/logoutadmin', [logoutAdminController::class, 'index']);
 Route::post('/admin/logoutadmin/logout', [logoutAdminController::class, 'logout'])->name('admin.logout');
+//SearchUser
+Route::get('/search', [searchController::class, 'index'])->name('search.index');
+//user
+Route::get('/User', [UserController::class, 'index'])->name('user.index');
+//login User
+Route::get('/Login', [LoginController::class, 'index'])->name('LoginHome');
+//logout User
+Route::get('/logout', [logoutController::class, 'logout'])->name('logoutUser');
+//goiUser
+Route::get('/goiUser', [goiUserController::class, 'index'])->name('goiLayout');
+//History
+Route::get('/History', [HistoryController::class, 'index'])->name('history');
+Route::post('/History/purchase', [HistoryController::class, 'purchase'])->name('purchase');
 //group admin
 Route::prefix('admin')->group(function () {
     // Đặt tất cả các route bạn muốn gắn vào nhóm "admin" ở đây
@@ -47,7 +69,6 @@ Route::prefix('admin')->group(function () {
     Route::post('uploadblogs', [BlogsController::class, 'uploadblogs'])->name('Blogs.uploadblogs');
     Route::get('/blogs/edit/{id}', [BlogsController::class, 'edit']);
     Route::put('updateblogs', [BlogsController::class, 'editblog'])->name('Blogs.updateblogs');
-
     // Blog Anime
     Route::get('/bloganime', [BlogAniController::class, 'BAlist'])->name('admin.bloganime');
     Route::get('/bloganime/add', [BlogAniController::class, 'create']);
@@ -68,7 +89,6 @@ Route::prefix('admin')->group(function () {
     Route::post('addtheloai', [TheLoaiController::class, 'adddata'])->name('addtheloai');
     Route::get('/theloai/edit/{id}', [TheLoaiController::class, 'edit']);
     Route::put('updatetheloai', [TheLoaiController::class, 'edittl'])->name('theloai.updatetheloai');
-
     //thể loại cho anime
     Route::get('/tlanime', [TLAnimeController::class, 'index'])->name('admin.tlanime');
     Route::get('/tlanime/add', [TLAnimeController::class, 'create']);
@@ -81,14 +101,12 @@ Route::prefix('admin')->group(function () {
     Route::post('addhangphim', [HangPhimController::class, 'adddata'])->name('addhangphim');
     Route::get('/hangphim/edit/{id}', [HangPhimController::class, 'edit']);
     Route::put('updatehangphim', [HangPhimController::class, 'edithp'])->name('hangphim.updatehangphim');
-
     // Goi
     Route::get('/goi', [GoiController::class, 'index'])->name('admin.goi');
     Route::get('/goi/add', [GoiController::class, 'create']);
     Route::post('addgoi', [GoiController::class, 'adddata'])->name('addgoi');
     Route::get('/goi/edit/{id}', [GoiController::class, 'edit']);
     Route::put('updategoi', [GoiController::class, 'editg'])->name('goi.updategoi');
-
     // LoaiPhim
     Route::get('/loaiphim', [LoaiPhimController::class, 'index'])->name('admin.loaiphim');
     Route::get('/loaiphim/add', [LoaiPhimController::class, 'create']);
@@ -103,3 +121,4 @@ Route::prefix('admin')->group(function () {
     Route::get('/tapphim/edit/{id}', [TapPhimController::class, 'edit']);
     Route::put('updatetapphim', [TapPhimController::class, 'edittp'])->name('tapphim.updatetapphim');
 });
+
