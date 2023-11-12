@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Laravel\Socialite\Facades\Socialite;
+
 
 class Userss extends Model implements Authenticatable
 {
@@ -18,6 +20,7 @@ class Userss extends Model implements Authenticatable
         $users = DB::table($this->table)->get();
         return $users;
     }
+
     public function getDetail($id)
     {
         $users = DB::table($this->table)->where('MaND', $id)->first();
@@ -60,5 +63,20 @@ class Userss extends Model implements Authenticatable
     public function getRememberTokenName()
     {
         // Implement this method if you are using "remember me" functionality
+
+    public function insertuser($data)
+    {
+
+        return  DB::table($this->table)->insert($data);
+    }
+    public function updateuser($id, $data)
+    {
+        return DB::table($this->table)->where('id', '=', $id)->update($data);
+    }
+
+    public function deleteuser($id)
+    {
+        return DB::table($this->table)->where('id', '=', $id)->delete();
+
     }
 }

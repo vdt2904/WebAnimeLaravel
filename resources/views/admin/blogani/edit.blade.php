@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <label for="video">Trailer</label>
-            <input type="file" class="form-control-file" id="video" name="video" accept="video/*" required>
+            <input type="file" class="form-control-file" id="video" name="video" accept="video/*">
             <p id="trailerLink">Link cũ: <a href="{{$anibdetail->Trailer}}" >{{$anibdetail->Trailer}}</a></p>
             
         </div>

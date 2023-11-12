@@ -19,4 +19,7 @@ class review extends Model
     {
         return DB::table($this->table)->insert($data);
     }
+    public function deletedata($id){
+        return DB::table($this->table)->where('ID',$id)->orWhere('MaAnime', $id)->delete();
+    }
 }

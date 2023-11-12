@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
 class bloganime extends Model
 {
     use HasFactory;
@@ -29,8 +28,8 @@ class bloganime extends Model
     {
         return DB::table($this->table)->where('ID', $id)->update($data);
     }
-    public function deletedata($id)
-    {
-        return DB::table($this->table)->where('ID', $id)->delete();
+    public function deletedata($id){
+        return DB::table($this->table)->where('ID', $id)->orWhere('MaAnime', $id)->orWhere('IDBLog', $id)->delete();
     }
+    
 }

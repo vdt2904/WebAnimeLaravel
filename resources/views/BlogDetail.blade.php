@@ -20,8 +20,10 @@
     <link rel="stylesheet" href="/Home/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/Home/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/Home/css/style.css" type="text/css">
+
     <title>Anime |  @if($data->isNotEmpty())
         {{ $data[0]->TenBlog }}@else Default @endif </title>
+
    
 </head>
 
@@ -37,6 +39,7 @@
    
     <!-- Blog Details Section Begin -->
     @if($data->isNotEmpty())
+
     <section class="blog-details spad">
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -66,14 +69,12 @@
                     $part1 .= $token . ' ';
                     $token = strtok(' ');
                     $count++;
-                }
-                
+                }                
                 // The remaining part is part2
                 $part2 = $token . strtok(''); // Using strtok('') to get the rest of the text
                 
                 // Now $part1 and $part2 contain the two halves of the text based on words
-                
-              
+
                  ?>
                 <div class="col-lg-8">
                     <div class="blog__details__content">
@@ -113,7 +114,6 @@
             @else
                         <h3 style="height:470px; color: white; text-align:center">Không có bài viết nào</h3>
         </section>
-     
         @endif
         <!-- Blog Details Section End -->
 
