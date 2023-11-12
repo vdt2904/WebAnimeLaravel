@@ -168,12 +168,20 @@
             }
     
             // Add page buttons
+            var a = response.links.length - 2;
             for (var i = 0; i < response.links.length; i++) {
                 var link = response.links[i];
-                if (link.active) {
-                    $('#pagination ul').append('<li class="page-item active"><span class="page-link">' + label + '</span></li>');
-                } else {
-                    $('#pagination ul').append('<li class="page-item"><a class="page-link" onclick="goToPage(' + label + ')">' + label + '</a></li>');
+                if (link.active && link.label != '&laquo; Previous' && link.label != 'Next &raquo;') {
+                    $('#pagination ul').append('<li class="page-item active"><span class="page-link">' + link.label + '</span></li>');
+                }
+                if(!link.active && link.label != '&laquo; Previous' && link.label != 'Next &raquo;'){
+                    $('#pagination ul').append('<li class="page-item"><a class="page-link" onclick="goToPage(' + link.label + ')">' + link.label + '</a></li>');
+                }
+                if(link.label == '&laquo; Previous'){
+                    $('#pagination ul').append('<li class="page-item"><a class="page-link" onclick="goToPage(1)">' + link.label + '</a></li>');
+                }
+                if(link.label == 'Next &raquo;'){                   
+                    $('#pagination ul').append('<li class="page-item"><a class="page-link" onclick="goToPage(' + a + ')">' + link.label + '</a></li>');
                 }
             }   
             // Add "Next" button if available
