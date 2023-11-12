@@ -13,4 +13,8 @@ class animewatchController extends Controller
         $b = $a->getdata($maanime,$matp);
         return View('home.watch',compact('b'));
     }
+    public function comments($matp, $page, $perPage){
+        $a = new watch();
+        return $a->getcmt($matp, $page, $perPage);
+    }
 }
