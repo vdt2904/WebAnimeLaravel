@@ -29,11 +29,13 @@
                                 </ul>
                             </li>
                             <li><a href="{{ url('/blog') }}">Our Blog</a></li>
-                            <li><a href="#">Contacts</a></li>
+                            <li><a href="{{ route('contact') }}">Contacts</a></li>
+                            <li><a href="#" class="search-switch"><span class="icon_search"></span></a></li>
                         </ul>
                     </nav>
                 </div>
             </div>
+           
             <div class="col-lg-2">
                 <div class="header__right">
                     <a href="#" class="search-switch"><span class="icon_search"></span></a>
@@ -43,7 +45,6 @@
                     <a href="{{ url('/login') }}" class="profile-link"><span class="icon_profile"></span><span></span></a>
                     @endif
                     <input type="text" id="search-input" name="search" placeholder="Search here.....">
-                  
                 </div>
                 <div id="search_list"></div>
             </div>
@@ -52,7 +53,6 @@
     </div>
 </header>
 <!-- Header End -->
-
   <style>
   .item-dropdown {
    
@@ -150,7 +150,6 @@ body:not(:focus-within) #search-input {
 }
 
 </style>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     

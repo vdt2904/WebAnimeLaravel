@@ -36,7 +36,6 @@
     <!-- Header Section Begin -->
     @include('home.header')
     <!-- Header End -->
-
    
     <!-- Blog Details Section Begin -->
     @if($data->isNotEmpty())
@@ -48,7 +47,6 @@
                     <div class="blog__details__title">            
                         <h6>Date Submitted - <span> {{ $data[0]->NgayDang }} </span></h6>
                         <h1 style="color:aliceblue">Blog : {{ $data[0]->TenBlog }}</h1>
-
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -56,7 +54,7 @@
                         <img src="{{ $data[0]->Anh }}" alt="">
                     </div>
                 </div>
-                <?php $text =  $data[0]->ThongTin;
+                <?php $text = $data[0]->ThongTin;
                 $wordCount = str_word_count($text, 0); // Count the number of words
                 $halfWordCount = ceil($wordCount / 2); // Calculate half of the word count
                 
@@ -71,10 +69,12 @@
                     $part1 .= $token . ' ';
                     $token = strtok(' ');
                     $count++;
-                }             
+                }                
                 // The remaining part is part2
-                $part2 = $token . strtok(''); // Using strtok('') to get the rest of the text               
-                // Now $part1 and $part2 contain the two halves of the text based on words           
+                $part2 = $token . strtok(''); // Using strtok('') to get the rest of the text
+                
+                // Now $part1 and $part2 contain the two halves of the text based on words
+
                  ?>
                 <div class="col-lg-8">
                     <div class="blog__details__content">
@@ -106,7 +106,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         
                     </div>
