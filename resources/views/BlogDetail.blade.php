@@ -20,8 +20,7 @@
     <link rel="stylesheet" href="/Home/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/Home/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/Home/css/style.css" type="text/css">
-    <title>Anime |  @if($data->isNotEmpty())
-        {{ $data[0]->TenBlog }}@else Default @endif </title>
+    <title>Anime | Blog </title>
    
 </head>
 
@@ -36,7 +35,7 @@
     <!-- Header End -->
 
     <!-- Blog Details Section Begin -->
-    @if($data->isNotEmpty())
+    @if(!empty($data))
     <section class="blog-details spad">
         <div class="container">
             <div class="row d-flex justify-content-center">

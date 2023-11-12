@@ -29,6 +29,7 @@ class HistoryController extends Controller
             'NgayHetHan' => $tghh
         ];
         DB::table('tb_thanhtoan')->insert($data);
+        $b = DB::select('UPDATE tb_nguoidung set LoaiND = 1 where MaND = '.sesssion('InforUser.MaND'));
         return redirect()->route('history');
     }
 }

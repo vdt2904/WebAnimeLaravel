@@ -189,11 +189,7 @@
                             <form action="{{ route('purchase') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="MaGoi" value="{{ $package['MaGoi'] }}">
-                                @if ($sql > 0)
-                                    <button type="submit" disabled style="cursor: not-allowed; opacity: 0.7;" class="buy-button" >Mua Ngay</button>
-                                @else
-                                    <button type="submit"class="buy-button" >Mua Ngay</button>
-                                @endif
+                                <button type="submit"class="buy-button" >Mua Ngay</button>
                             </form>
                         </div>
                     @endforeach

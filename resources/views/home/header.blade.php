@@ -80,6 +80,7 @@
         display: none;
     max-height: 300px; /* Limit the height of the result container */
     width: 300px;
+    z-index: 2;
     overflow-y: auto; /* Add a scrollbar if the content overflows the container */
     border: 1px solid #ccc; /* Add a border around the container */
     border-radius: 5px; /* Round the corners of the container */

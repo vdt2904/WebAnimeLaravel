@@ -83,7 +83,12 @@
                                 <a class="nav-link active" href="#">Thông tin cá nhân</a>
                             </li>
                             <li class="nav-item">
+                                @if ($ttnd->LoaiND == 0)
                                 <a class="nav-link" href="{{route('goiLayout')}}">Mua gói cước</a>
+                                @else
+                                <a class="nav-link" href="#" readonly>Mua gói cước</a>
+                                @endif
+                                
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('history')}}">Lịch sử giao dịch</a>
@@ -106,7 +111,7 @@
                                 </span>
                                 <div class="profile-info">
                                     <div class="profile-info-div">
-                                        <p class="name">Viet Do Duc</p>
+                                        <p class="name">{{session('InforUser.TenND')}}</p>
                                         {{-- <div class="d-flex align-items-center">
                                             <span class="label">Giới tính: <span class="info">(Chưa cập nhật)</span></span>
                                             <span class="label">Sinh nhật: <span class="info">(Chưa cập nhật)</span></span>
@@ -153,7 +158,7 @@
                                        
                                        
                                         <span class="label">Loại tài khoản<span class="info">
-                                            @if (session('InforUser.LoaiND') == 0) 
+                                            @if ($ttnd->LoaiND == 0) 
                                             Thường
                                             @else
                                             VIP
